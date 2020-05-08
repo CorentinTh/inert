@@ -1,3 +1,3 @@
 class Waves {
-    waveCounter = 0
+    public waveCounter = 0
 }

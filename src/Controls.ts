@@ -5,6 +5,7 @@ class Controls extends EventEmitter {
     private element: HTMLElement;
     private bounds: DOMRect;
     public mouse = {x: 0, y: 0};
+    mouseInCanvas = false;
 
     constructor() {
         super();
@@ -15,13 +16,16 @@ class Controls extends EventEmitter {
             this.bounds = this.element.getBoundingClientRect();
         });
 
+        canvas.getElement().addEventListener("mouseenter", () => this.mouseInCanvas = true)
+        canvas.getElement().addEventListener("mouseleave", () => this.mouseInCanvas = false)
+
         this.createClickHandler();
         this.createMouseMoveHandler();
         this.createKeyDownHandler();
     }
 
     createClickHandler() {
-        this.element.addEventListener('click', event => {
+        window.addEventListener('click', event => {
             const x = event.clientX - this.bounds.left - this.element.clientLeft;
             const y = event.clientY - this.bounds.top - this.element.clientTop;
 
@@ -30,15 +34,15 @@ class Controls extends EventEmitter {
     }
 
     private createMouseMoveHandler() {
-        this.element.addEventListener('mousemove', event => {
+        window.addEventListener('mousemove', event => {
             this.mouse.x = event.clientX - this.bounds.left - this.element.clientLeft;
             this.mouse.y = event.clientY - this.bounds.top - this.element.clientTop;
         });
     }
 
     private createKeyDownHandler() {
-        this.element.addEventListener('keydown', ({key}) => {
-            console.log(key.toUpperCase());
+        window.addEventListener('keydown', ({key}) => {
+            console.log('ee');
             this.emit(`keydown:${key.toUpperCase()}`);
         });
     }

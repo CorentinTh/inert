@@ -10,7 +10,6 @@ const drawRoundedSquare = (ctx: CanvasRenderingContext2D, x: number, y: number, 
     ctx.lineTo(x, y + radius);
     ctx.quadraticCurveTo(x, y, x + radius, y);
     ctx.closePath();
-
 }
 
 export {

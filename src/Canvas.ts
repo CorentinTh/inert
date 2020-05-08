@@ -7,15 +7,14 @@ class Canvas extends EventEmitter{
 
     constructor() {
         super();
-        this.canvasElement = document.createElement('canvas');
+        this.canvasElement = <HTMLCanvasElement>document.getElementById('canvas');
         this.canvasElement.tabIndex = 1;
         this.ctx = this.canvasElement.getContext('2d')!;
 
-        this.ctx.fillStyle = '#568EA6';
-        this.ctx.fillStyle = '#568EA6';
-
         this.resize()
 
+        const m = this.ctx.getTransform();
+        console.log(m);
         window.addEventListener('resize', this.resize.bind(this))
         // this.canvasElement.addEventListener('wheel', this.handleScroll.bind(this))
     }

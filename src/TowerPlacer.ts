@@ -11,6 +11,7 @@ class TowerPlacer extends Renderable {
     private j: number = 0;
     private i: number = 0;
     private placementCache: { [k: string]: boolean } = {}
+    private shouldBeDrawn = false;
 
     constructor() {
         super();
@@ -23,14 +24,14 @@ class TowerPlacer extends Renderable {
         })
 
         controls.on('keydown:ESCAPE', () => {
-            if (this.placing){
+            if (this.placing) {
                 this.placing = false;
             }
         })
     }
 
     draw(ctx: CanvasRenderingContext2D): void {
-        if (this.placing) {
+        if (this.placing && this.shouldBeDrawn) {
             this.tower.draw(ctx);
             this.tower.drawAimingRadius(ctx)
 
@@ -48,13 +49,23 @@ class TowerPlacer extends Renderable {
 
     update(): void {
         if (this.placing) {
-            this.i = Math.min(Math.floor(controls.mouse.x / Map.TILE_SIZE), map.grid.length-1);
-            this.j = Math.min(Math.floor(controls.mouse.y / Map.TILE_SIZE), map.grid[0].length-1);
-            this.x = this.i * Map.TILE_SIZE
-            this.y = this.j * Map.TILE_SIZE
+            this.shouldBeDrawn = false;
 
-            this.tower.setCoordinates(this.x, this.y)
+            this.i = Math.floor(controls.mouse.x / Map.TILE_SIZE);
+            this.j = Math.floor(controls.mouse.y / Map.TILE_SIZE);
+
+            if (this.isMouseOverGrid()) {
+                this.x = this.i * Map.TILE_SIZE
+                this.y = this.j * Map.TILE_SIZE
+                this.tower.setCoordinates(this.x, this.y)
+
+                this.shouldBeDrawn = true;
+            }
         }
+    }
+
+    isMouseOverGrid() {
+        return controls.mouseInCanvas && this.i < map.grid.length && this.j < map.grid[0].length
     }
 
     canBePlaced() {
@@ -64,12 +75,19 @@ class TowerPlacer extends Renderable {
         if (fromCache !== undefined) {
             return fromCache;
         } else {
-            return /*this.placementCache[key] =*/ map.canBePlaced(this.i, this.j);
+            return this.isMouseOverGrid() && map.canBePlaced(this.i, this.j);
         }
     }
 
     invalidatePlacementCache() {
         this.placementCache = {};
+    }
+
+    place(TowerClass: new (...args: any[]) => Tower) {
+        this.shouldBeDrawn = false;
+        this.placing = true;
+
+        this.tower = new TowerClass(0, 0, Map.TILE_SIZE);
     }
 }
 
