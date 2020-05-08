@@ -9,7 +9,7 @@ export abstract class Renderable {
 
     abstract update(): void;
 
-    abstract draw(): void;
+    abstract draw(ctx: CanvasRenderingContext2D): void;
 
     setCoordinates(x: number, y: number) {
         this.x = x;

@@ -1,9 +1,7 @@
 import {Point} from "../../interfaces/Point";
 import {Base} from "../terrain/Base";
 import {Renderable} from "../../interfaces/Renderable";
-import {easyAStar} from "../../tools/astar";
 import {map, Map} from "../../Map";
-import {ctx} from "../../Canvas";
 import {colors} from "../../config.json"
 import {drawRoundedSquare} from "../../tools/shapes";
 
@@ -68,7 +66,7 @@ export abstract class Enemy extends Renderable implements Point {
         }
     }
 
-    drawHealthBar() {
+    drawHealthBar(ctx: CanvasRenderingContext2D) {
         const ratio = 1 - this.damageTaken/this.life;
         ctx.fillStyle = '#4a4a4e'
         drawRoundedSquare(ctx,this.x -10, this.y+12, 20, 3, 3)
@@ -78,9 +76,9 @@ export abstract class Enemy extends Renderable implements Point {
         ctx.fill()
     }
 
-    draw() {
+    draw(ctx: CanvasRenderingContext2D): void {
         if (this.damageTaken > 0){
-            this.drawHealthBar()
+            this.drawHealthBar(ctx)
         }
     }
 

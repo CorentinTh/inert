@@ -1,13 +1,10 @@
 import {Tower} from "./Tower";
-import {canvas} from "../../Canvas";
 import {PI2} from "../../tools/constants";
-import {colors} from "../../config.json"
 import {Point} from "../../interfaces/Point";
 import {Enemy} from "../enemies/Enemy";
 import {munitionManager} from "../../MunitionManager";
 import {BasicMunition} from "../munitions/BasicMunition";
 
-const ctx = canvas.getCtx();
 
 export class SimpleTower extends Tower {
     public reloadDurationMs: number = 400;
@@ -53,11 +50,11 @@ export class SimpleTower extends Tower {
         }
     }
 
-    draw(): void {
+    draw(ctx: CanvasRenderingContext2D): void {
         ctx.strokeStyle = this.colors.secondary;
         ctx.fillStyle = this.colors.primary;
 
-        this.drawCanon()
+        this.drawCanon(ctx)
 
         ctx.beginPath();
         ctx.lineWidth = 4;
@@ -66,10 +63,10 @@ export class SimpleTower extends Tower {
         ctx.fill()
         ctx.stroke()
 
-        super.draw();
+        super.draw(ctx);
     }
 
-    drawCanon() {
+    drawCanon(ctx: CanvasRenderingContext2D) {
         ctx.lineWidth = 12;
 
         ctx.beginPath()

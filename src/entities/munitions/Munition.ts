@@ -1,6 +1,5 @@
 import {Renderable} from "../../interfaces/Renderable";
 import {Enemy} from "../enemies/Enemy";
-import {GridRenderable} from "../../interfaces/GridRenderable";
 import {Tower} from "../towers/Tower";
 
 export abstract class Munition extends Renderable {

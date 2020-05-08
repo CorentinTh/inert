@@ -33,7 +33,7 @@ export abstract class GridRenderable extends Renderable {
             controls.mouse.x <= this.right;
     }
 
-    abstract draw(): void;
+    abstract draw(ctx: CanvasRenderingContext2D): void;
 
     setCoordinates(x: number, y: number) {
         this.x = x;

@@ -1,4 +1,3 @@
-import {canvas} from "./Canvas";
 import {SimpleTower} from "./entities/towers/SimpleTower";
 import {Base} from "./entities/terrain/Base";
 import {GridRenderable} from "./interfaces/GridRenderable";
@@ -33,8 +32,7 @@ class Map extends EventEmitter{
         }
     }
 
-    draw() {
-        const ctx = canvas.getCtx();
+    draw(ctx: CanvasRenderingContext2D) {
 
         ctx.strokeStyle = "#eeeeee06";
         ctx.lineWidth = 1;
@@ -43,7 +41,7 @@ class Map extends EventEmitter{
             for (let y = 0; y < this.grid[x].length; ++y) {
                 const element = this.grid[x][y];
                 if (element !== 0 && element !== 1) {
-                    element.draw();
+                    element.draw(ctx);
                     ctx.strokeStyle = "#eeeeee06";
                     ctx.lineWidth = 1;
                 } else {

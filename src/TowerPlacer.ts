@@ -3,7 +3,6 @@ import {SimpleTower} from "./entities/towers/SimpleTower";
 import {map, Map} from "./Map";
 import {Renderable} from "./interfaces/Renderable";
 import {controls} from "./Controls";
-import {ctx} from "./Canvas";
 import {GridRenderable} from "./interfaces/GridRenderable";
 
 class TowerPlacer extends Renderable {
@@ -30,10 +29,10 @@ class TowerPlacer extends Renderable {
         })
     }
 
-    draw(): void {
+    draw(ctx: CanvasRenderingContext2D): void {
         if (this.placing) {
-            this.tower.draw();
-            this.tower.drawAimingRadius()
+            this.tower.draw(ctx);
+            this.tower.drawAimingRadius(ctx)
 
             if (!this.canBePlaced()) {
                 ctx.strokeStyle = 'red'

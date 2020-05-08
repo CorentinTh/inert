@@ -1,9 +1,6 @@
 import {GridRenderable} from "../../interfaces/GridRenderable";
 import {drawRoundedSquare} from "../../tools/shapes";
-import {canvas} from "../../Canvas";
 import {colors} from "../../config.json";
-
-const ctx = canvas.getCtx();
 
 export class Base extends GridRenderable {
     private colors: { primary: string; secondary: string };
@@ -14,7 +11,7 @@ export class Base extends GridRenderable {
         this.colors = isHome ? colors.homeBase : colors.enemyBase;
     }
 
-    draw(): void {
+    draw(ctx: CanvasRenderingContext2D): void {
         ctx.fillStyle = this.colors.primary
         ctx.strokeStyle = this.colors.secondary
 

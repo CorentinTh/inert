@@ -1,5 +1,5 @@
 import * as config from './config.json'
-import {canvas} from "./Canvas";
+import {canvas, ctx} from "./Canvas";
 import {fps} from "./config.json";
 import './Controls';
 import {map} from "./Map";
@@ -42,10 +42,10 @@ class Game {
 
     drawLoop() {
         canvas.clear();
-        munitionManager.draw()
-        enemyManager.draw()
-        map.draw();
-        towerPlacer.draw()
+        munitionManager.draw(ctx);
+        enemyManager.draw(ctx);
+        map.draw(ctx);
+        towerPlacer.draw(ctx);
 
         requestAnimationFrame(this.drawLoop.bind(this))
     }

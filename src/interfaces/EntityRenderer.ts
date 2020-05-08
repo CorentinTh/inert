@@ -11,7 +11,7 @@ export class EntityRenderer<T extends Renderable> {
         this.entities.forEach(entity => entity.update());
     }
 
-    draw() {
-        this.entities.forEach(entity => entity.draw());
+    draw(ctx: CanvasRenderingContext2D) {
+        this.entities.forEach(entity => entity.draw(ctx));
     }
 }

@@ -1,6 +1,5 @@
 import {Enemy} from "./Enemy";
 import {PI2} from "../../tools/constants";
-import {ctx} from "../../Canvas";
 import {colors} from "../../config.json"
 
 export class ArmoredEnemy extends Enemy{
@@ -8,8 +7,8 @@ export class ArmoredEnemy extends Enemy{
     speed: number = 2.5;
     private radius = 8
 
-    draw(): void {
-        super.draw();
+    draw(ctx: CanvasRenderingContext2D): void {
+        super.draw(ctx);
 
         ctx.fillStyle = colors.enemyBase.primary
         ctx.strokeStyle = colors.enemyBase.secondary

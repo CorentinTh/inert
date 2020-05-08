@@ -2,11 +2,8 @@ import {GridRenderable} from "../../interfaces/GridRenderable";
 import {fps} from "../../config.json";
 import {Enemy} from "../enemies/Enemy";
 import {euclideanDistanceSquared} from "../../tools/helphers";
-import {munitionManager} from "../../MunitionManager";
-import {BasicMunition} from "../munitions/BasicMunition";
 import {enemyManager} from "../../EnemyManager";
 import {PI2} from "../../tools/constants";
-import {ctx} from "../../Canvas";
 
 const frameDuration = 1000 / fps;
 
@@ -48,7 +45,7 @@ export abstract class Tower extends GridRenderable {
 
     }
 
-    drawAimingRadius() {
+    drawAimingRadius(ctx: CanvasRenderingContext2D) {
         ctx.beginPath();
         const tmpColor = ctx.fillStyle;
         ctx.fillStyle += '22'
@@ -57,9 +54,9 @@ export abstract class Tower extends GridRenderable {
         ctx.fillStyle = tmpColor;
     }
 
-    draw() {
+    draw(ctx: CanvasRenderingContext2D): void {
         if (this.isHovered) {
-            this.drawAimingRadius()
+            this.drawAimingRadius(ctx)
         }
     }
 
