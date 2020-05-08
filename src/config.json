@@ -1,0 +1,18 @@
+{
+  "initialBalance": 100,
+  "fps": 30,
+  "containerID": "game-wrapper",
+  "colors": {
+    "background": "#202125",
+    "homeBase": {
+      "primary": "#27ae60",
+      "secondary": "#2ecc71"
+    },
+    "enemyBase": {
+      "primary": "#c34667",
+      "secondary": "#cf6a87"
+    },
+
+    "primary" : "#556EE6"
+  }
+}
