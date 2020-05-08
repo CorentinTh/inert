@@ -10,7 +10,6 @@ class TowerPlacer extends Renderable {
     public placing = true;
     private j: number = 0;
     private i: number = 0;
-    private placementCache: { [k: string]: boolean } = {}
     private shouldBeDrawn = false;
 
     constructor() {
@@ -19,7 +18,6 @@ class TowerPlacer extends Renderable {
         controls.on('click', () => {
             if (this.placing && this.canBePlaced()) {
                 map.addElement(this.i, this.j, <new (...args: any[]) => GridRenderable>this.tower.constructor);
-                this.invalidatePlacementCache()
             }
         })
 
@@ -69,18 +67,7 @@ class TowerPlacer extends Renderable {
     }
 
     canBePlaced() {
-        const key = `${this.i}-${this.j}`;
-        const fromCache = this.placementCache[key];
-
-        if (fromCache !== undefined) {
-            return fromCache;
-        } else {
-            return this.isMouseOverGrid() && map.canBePlaced(this.i, this.j);
-        }
-    }
-
-    invalidatePlacementCache() {
-        this.placementCache = {};
+        return this.isMouseOverGrid() && map.canBePlaced(this.i, this.j);
     }
 
     place(TowerClass: new (...args: any[]) => Tower) {
