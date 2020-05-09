@@ -139,6 +139,41 @@ body {
           }
         }
       }
+
+      #towers-stats{
+        .title{
+          text-align: center;
+          font-size: 18px;
+          margin-top: 10px;
+        }
+
+        .description{
+          text-align: justify;
+          margin: 15px 0;
+        }
+
+        table{
+          width: 100%;
+          padding: 0;
+
+          tr{
+            padding: 0;
+
+            td{
+              padding: 0 5px;
+              width: 50%;
+
+              &:first-child{
+                text-align: right;
+              }
+
+              &:last-child{
+                .accent;
+              }
+            }
+          }
+        }
+      }
     }
 
     footer {
@@ -170,6 +205,53 @@ body {
         &:hover {
           border-bottom-color: var(--accent);
         }
+      }
+    }
+  }
+
+  #snackbar {
+    opacity: 0;
+    background-color: #454545;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 16px 30px;
+    position: fixed;
+    z-index: 3;
+    left: 50%;
+    transform: translate(-50%);
+    box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+
+    &.show {
+      opacity: 1;
+      animation: fadein 0.5s;
+      top: 30px;
+    }
+
+    &.hide {
+      animation: fadeout 0.5s;
+      top: -100px;
+    }
+
+    @keyframes fadein {
+      from {
+        top: -30px;
+        opacity: 0;
+      }
+      to {
+        top: 30px;
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeout {
+      from {
+        top: 30px;
+        opacity: 1;
+      }
+      to {
+        top: -100px;
+        opacity: 0;
       }
     }
   }

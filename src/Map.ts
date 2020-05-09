@@ -1,4 +1,4 @@
-import {SimpleTower} from "./entities/towers/SimpleTower";
+import {CanonTower} from "./entities/towers/CanonTower";
 import {Base} from "./entities/terrain/Base";
 import {GridRenderable} from "./interfaces/GridRenderable";
 import {Rock} from "./entities/terrain/Rock";
@@ -7,7 +7,7 @@ import {easyAStar} from "./tools/astar";
 import {randIndex} from "./tools/helphers";
 import {enemyManager} from "./EnemyManager";
 import {EventEmitter} from "./tools/EventEmitter";
-import {FastTower} from "./entities/towers/FastTower";
+import {GatlingTower} from "./entities/towers/GatlingTower";
 
 class Map extends EventEmitter {
     public grid: (GridRenderable | 0 | 1)[][] = new Array(100).fill(0).map(() => new Array(40).fill(0));
@@ -18,9 +18,9 @@ class Map extends EventEmitter {
 
     constructor() {
         super();
-        this.addElement(9, 11, SimpleTower)
-        this.addElement(9, 12, FastTower)
-        this.addElement(18, 3, SimpleTower)
+        this.addElement(9, 11, CanonTower)
+        this.addElement(9, 12, GatlingTower)
+        this.addElement(18, 3, CanonTower)
 
         this.homeBase = this.addBase(10, 15, true);
         this.enemyBases.push(
@@ -31,9 +31,7 @@ class Map extends EventEmitter {
             this.addElement(randIndex(this.grid), randIndex(this.grid[0]), Rock)
         }
     }
-
-    draw(ctx: CanvasRenderingContext2D) {
-
+    drawGrid(ctx: CanvasRenderingContext2D){
         ctx.strokeStyle = "#25272b";
         ctx.lineWidth = 1;
 
@@ -51,6 +49,9 @@ class Map extends EventEmitter {
         }
         ctx.closePath()
         ctx.stroke();
+    }
+
+    draw(ctx: CanvasRenderingContext2D) {
 
         for (let x = 0; x < this.grid.length; ++x) {
             for (let y = 0; y < this.grid[x].length; ++y) {

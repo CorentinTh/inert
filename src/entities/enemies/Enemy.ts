@@ -4,6 +4,7 @@ import {Renderable} from "../../interfaces/Renderable";
 import {map, Map} from "../../Map";
 import {colors} from "../../config.json"
 import {drawRoundedSquare} from "../../tools/shapes";
+import {cashManager} from "../../CashManager";
 
 let path = map.getPathFromGridCell(map.enemyBases[0].i, map.enemyBases[0].j)
 if (path) {
@@ -16,6 +17,7 @@ if (path) {
 export abstract class Enemy extends Renderable implements Point {
     abstract speed: number;
     abstract life: number;
+    abstract cash: number;
     private damageTaken: number = 0;
     private targetIndex: number = 1;
     public alive = true;
@@ -67,17 +69,17 @@ export abstract class Enemy extends Renderable implements Point {
     }
 
     drawHealthBar(ctx: CanvasRenderingContext2D) {
-        const ratio = 1 - this.damageTaken/this.life;
+        const ratio = 1 - this.damageTaken / this.life;
         ctx.fillStyle = '#4a4a4e'
-        drawRoundedSquare(ctx,this.x -10, this.y+12, 20, 3, 3)
+        drawRoundedSquare(ctx, this.x - 10, this.y + 12, 20, 3, 3)
         ctx.fill()
         ctx.fillStyle = colors.enemyBase.primary
-        drawRoundedSquare(ctx,this.x -10, this.y+12, 20*ratio, 3, 3)
+        drawRoundedSquare(ctx, this.x - 10, this.y + 12, 20 * ratio, 3, 3)
         ctx.fill()
     }
 
     draw(ctx: CanvasRenderingContext2D): void {
-        if (this.damageTaken > 0){
+        if (this.damageTaken > 0) {
             this.drawHealthBar(ctx)
         }
     }
@@ -85,8 +87,9 @@ export abstract class Enemy extends Renderable implements Point {
     takeDamage(damage: number) {
         this.damageTaken += damage;
 
-        if (this.damageTaken >= this.life) {
-            this.alive = false
+        if (this.damageTaken >= this.life && this.alive) {
+            this.alive = false;
+            this.onDie();
         }
     }
 
@@ -95,5 +98,9 @@ export abstract class Enemy extends Renderable implements Point {
             Math.floor(this.x / Map.TILE_SIZE),
             Math.floor(this.y / Map.TILE_SIZE)
         )
+    }
+
+    private onDie() {
+        cashManager.add(this.cash);
     }
 }

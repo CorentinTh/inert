@@ -1,13 +1,15 @@
 import {Tower} from "./entities/towers/Tower";
-import {SimpleTower} from "./entities/towers/SimpleTower";
+import {CanonTower} from "./entities/towers/CanonTower";
 import {map, Map} from "./Map";
 import {Renderable} from "./interfaces/Renderable";
 import {controls} from "./Controls";
 import {GridRenderable} from "./interfaces/GridRenderable";
+import {interfaceManager} from "./InterfaceManager";
+import {cashManager} from "./CashManager";
 
 class TowerPlacer extends Renderable {
-    public tower: Tower = new SimpleTower(0, 0, Map.TILE_SIZE);
-    public placing = true;
+    public tower: Tower = new CanonTower(0, 0, Map.TILE_SIZE);
+    public placing = false;
     private j: number = 0;
     private i: number = 0;
     private shouldBeDrawn = false;
@@ -17,7 +19,12 @@ class TowerPlacer extends Renderable {
 
         controls.on('click', () => {
             if (this.placing && this.canBePlaced()) {
-                map.addElement(this.i, this.j, <new (...args: any[]) => GridRenderable>this.tower.constructor);
+                if(cashManager.canWithdraw(this.tower.cost)){
+                    cashManager.withdraw(this.tower.cost)
+                    map.addElement(this.i, this.j, <new (...args: any[]) => GridRenderable>this.tower.constructor);
+                }else{
+                    interfaceManager.snackbar.toast('You don\'t have enought money to buy this tower');
+                }
             }
         })
 
@@ -35,6 +42,7 @@ class TowerPlacer extends Renderable {
 
             if (!this.canBePlaced()) {
                 ctx.strokeStyle = 'red'
+                ctx.lineWidth = 4;
                 ctx.beginPath();
                 ctx.moveTo(this.x + Map.TILE_SIZE / 2 - 10, this.y + Map.TILE_SIZE / 2 - 10);
                 ctx.lineTo(this.x + Map.TILE_SIZE / 2 + 10, this.y + Map.TILE_SIZE / 2 + 10);

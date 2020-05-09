@@ -8,6 +8,7 @@ import {controls} from "./Controls";
 import {towerPlacer} from "./TowerPlacer";
 import {ArmoredEnemy} from "./entities/enemies/ArmoredEnemy";
 import './InterfaceManager';
+import {interfaceManager} from "./InterfaceManager";
 
 class Game {
 
@@ -28,17 +29,18 @@ class Game {
 
     updateLoop() {
         if (controls.tabHasFocus()) {
+            map.update();
             munitionManager.update()
             enemyManager.update()
-            map.update();
             towerPlacer.update()
         }
     }
 
     drawLoop() {
         canvas.clear();
-        map.draw(ctx);
+        map.drawGrid(ctx);
         munitionManager.draw(ctx);
+        map.draw(ctx);
         enemyManager.draw(ctx);
         towerPlacer.draw(ctx);
 

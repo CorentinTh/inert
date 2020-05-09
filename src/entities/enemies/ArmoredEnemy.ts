@@ -5,6 +5,7 @@ import {colors} from "../../config.json"
 export class ArmoredEnemy extends Enemy{
     life: number = 200;
     speed: number = 2.5;
+    cash: number = 20;
     private radius = 8
 
     draw(ctx: CanvasRenderingContext2D): void {

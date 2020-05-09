@@ -9,19 +9,24 @@ const frameDuration = 1000 / fps;
 
 export abstract class Tower extends GridRenderable {
     abstract reloadDurationMs: number;
-    abstract damage: number;
+    abstract damage: number | { max: number, min: number };
+    abstract cost: number;
     private countdown: number = 0;
     protected canShoot: boolean = false;
     public traversable = false;
     abstract target: Enemy | undefined;
     abstract aimRadius: number;
     abstract colors: {
-        primary:string,
-        secondary:string
+        primary: string,
+        secondary: string
     };
+    public targetInRange = false;
+    abstract name: string;
+    description: string = 'Lorem ipsum dolor sit amet';
 
     update() {
         super.update();
+
         this.countdown += frameDuration;
         if (this.countdown >= this.reloadDurationMs) {
             this.canShoot = true;
@@ -31,8 +36,13 @@ export abstract class Tower extends GridRenderable {
         if (this.target && !this.target.alive) {
             // Target died
             this.target = undefined;
+            this.targetInRange = false;
         } else if (this.target && euclideanDistanceSquared(this.center.x, this.center.y, this.target.x, this.target.y) < this.aimRadius * this.aimRadius) {
             // Target in range
+            if(!this.targetInRange){
+                this.onNewTargetInRange();
+                this.targetInRange = true;
+            }
 
             if (this.canShoot) {
                 this.canShoot = false;
@@ -41,6 +51,7 @@ export abstract class Tower extends GridRenderable {
         } else {
             // No target or target no more in range
             this.target = enemyManager.getClosestPointInRadius(this.center.x, this.center.y, this.aimRadius);
+            this.targetInRange = false;
         }
 
     }
@@ -60,5 +71,7 @@ export abstract class Tower extends GridRenderable {
         }
     }
 
-    abstract shoot(): void;
+    protected shoot(){}
+
+    protected onNewTargetInRange() {}
 }

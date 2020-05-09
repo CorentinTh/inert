@@ -3,12 +3,14 @@ import {PI2} from "../../tools/constants";
 import {Point} from "../../interfaces/Point";
 import {Enemy} from "../enemies/Enemy";
 import {munitionManager} from "../../MunitionManager";
-import {BasicMunition} from "../munitions/BasicMunition";
+import {BulletMunition} from "../munitions/BulletMunition";
 
 
-export class SimpleTower extends Tower {
+export class CanonTower extends Tower {
+    public name = 'Canon';
     public reloadDurationMs: number = 400;
     public damage: number = 25;
+    public cost: number = 50;
 
     private readonly radius: number;
     private canonLength: number;
@@ -33,8 +35,8 @@ export class SimpleTower extends Tower {
     }
 
     shoot() {
-        munitionManager.add(new BasicMunition(this.target!, this));
-        this.canonLength *=0.8;
+        munitionManager.add(new BulletMunition(this.target!, this));
+        this.canonLength *= 0.8;
     }
 
     update() {

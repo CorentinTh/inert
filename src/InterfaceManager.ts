@@ -1,36 +1,42 @@
 import {version} from './../package.json'
-import {SimpleTower} from "./entities/towers/SimpleTower";
-import {FastTower} from "./entities/towers/FastTower";
+import {CanonTower} from "./entities/towers/CanonTower";
+import {GatlingTower} from "./entities/towers/GatlingTower";
 import {Tower} from "./entities/towers/Tower";
 import {SniperTower} from "./entities/towers/SniperTower";
 import {Map} from "./Map";
 import {GridRenderable} from "./interfaces/GridRenderable";
 import {towerPlacer} from "./TowerPlacer";
+import {Snackbar} from "./tools/Snackbar";
+import {LaserTower} from "./entities/towers/LaserTower";
 
 class InterfaceManager {
     private versionElement = document.getElementById('version')!;
     private waveElement = document.getElementById('wave')!;
     private cashElement = document.getElementById('cash')!;
     private towersWrapperElement = document.getElementById('towers-wrapper')!;
+    private towersStatsElement = document.getElementById('towers-stats')!;
+    public snackbar = new Snackbar();
 
     constructor() {
-        this.versionElement.innerText = 'v' + version;
+        this.versionElement.textContent = 'v' + version;
 
         this.setTowers()
     }
 
     setWave(wave: number) {
-        this.waveElement.innerText = String(wave);
+        this.waveElement.textContent = String(wave);
     }
 
     setCash(cash: number) {
-        this.cashElement.innerText = String(cash);
+        this.cashElement.textContent = String(cash);
     }
 
     private setTowers() {
         const towers = [
-            SimpleTower,
-            FastTower,
+            CanonTower,
+            GatlingTower,
+            SniperTower,
+            LaserTower
         ];
         const pad = Map.TILE_SIZE * 0.5;
         const canvasSize = Map.TILE_SIZE + pad;
@@ -42,13 +48,38 @@ class InterfaceManager {
             this.towersWrapperElement.insertAdjacentElement("beforeend", canvas);
 
             const ctx = canvas.getContext('2d')!;
-            const tower = new TowerClass(0,0, Map.TILE_SIZE);
-            tower.setCoordinates(pad/2, pad/2);
+            const tower = new TowerClass(0, 0, Map.TILE_SIZE);
+            tower.setCoordinates(pad / 2, pad / 2);
             tower.draw(ctx);
 
-            canvas.onclick = () => towerPlacer.place(TowerClass);
+            canvas.onclick = () => {
+                towerPlacer.place(TowerClass);
+                this.showTowerStats(tower);
+            };
         })
+    }
 
+    private showTowerStats(tower: Tower) {
+
+        const damage = typeof tower.damage === 'object' ?
+            `${tower.damage.min} - ${tower.damage.max}` :
+            tower.damage;
+
+        const reloadDuration = tower.reloadDurationMs / 1000;
+        const dps = typeof tower.damage === 'object' ?
+            `${tower.damage.min / reloadDuration} - ${tower.damage.max / reloadDuration}` :
+            tower.damage / reloadDuration;
+
+        this.towersStatsElement.innerHTML = `
+            <div class="title">${tower.name}</div>
+            <div class="description">${tower.description}</div>
+            <table>
+                <tr><td>Cost: </td><td>${tower.cost} ¢</td></tr>
+                <tr><td>Damage:</td><td>${damage}</td></tr>
+                <tr><td>Reload:</td><td>${reloadDuration.toFixed(3)} s</td></tr>
+                <tr><td title="Damage Per Second">DPS:</td><td>${dps}</td></tr>
+            </table>
+        `
     }
 }
 
