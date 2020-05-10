@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "parcel public/index.html -d ./dev",
-    "build": "parcel build public/index.html -d ./dist"
+    "build": "parcel build public/index.html public/humans.txt -d ./dist"
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,9 @@
   "bugs": {
     "url": "https://github.com/CorentinTh/inert/issues"
   },
+  "browserslist": [
+    "last 1 Chrome versions"
+  ],
   "homepage": "https://github.com/CorentinTh/inert#readme",
   "dependencies": {},
   "devDependencies": {

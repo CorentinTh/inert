@@ -6,7 +6,7 @@ import {colors} from "../../config.json"
 export class SimpleEnemy extends Enemy{
     life: number = 50;
     speed: number = 2.5;
-    cash: number = 10;
+    cash: number = 5;
     private radius = 8
 
     draw(ctx: CanvasRenderingContext2D): void {

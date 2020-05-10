@@ -22,7 +22,7 @@ export abstract class Tower extends GridRenderable {
     };
     public targetInRange = false;
     abstract name: string;
-    description: string = 'Lorem ipsum dolor sit amet';
+    abstract description: string;
 
     update() {
         super.update();

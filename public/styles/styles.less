@@ -105,17 +105,23 @@ body {
     }
 
     .info {
-      & > div > span {
-        display: inline-block;
-        width: 49%;
-        font-size: 18px;
+      font-size: 18px;
+    }
 
-        &:first-child {
-          text-align: right;
-        }
+    table.table5050{
+      width: 100%;
+      padding: 0;
 
-        &:last-child {
-          text-align: left;
+      tr{
+        padding: 0;
+
+        td{
+          padding: 0 5px;
+          width: 50%;
+
+          &:first-child{
+            text-align: right;
+          }
         }
       }
     }
@@ -150,28 +156,6 @@ body {
         .description{
           text-align: justify;
           margin: 15px 0;
-        }
-
-        table{
-          width: 100%;
-          padding: 0;
-
-          tr{
-            padding: 0;
-
-            td{
-              padding: 0 5px;
-              width: 50%;
-
-              &:first-child{
-                text-align: right;
-              }
-
-              &:last-child{
-                .accent;
-              }
-            }
-          }
         }
       }
     }

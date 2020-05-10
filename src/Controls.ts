@@ -19,6 +19,9 @@ class Controls extends EventEmitter {
         canvas.getElement().addEventListener("mouseenter", () => this.mouseInCanvas = true)
         canvas.getElement().addEventListener("mouseleave", () => this.mouseInCanvas = false)
 
+        document.addEventListener('focusin', () => this.emit('focusin'))
+        document.addEventListener('focusout', () => this.emit('focusout'))
+
         this.createClickHandler();
         this.createMouseMoveHandler();
         this.createKeyDownHandler();

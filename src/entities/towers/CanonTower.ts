@@ -8,6 +8,7 @@ import {BulletMunition} from "../munitions/BulletMunition";
 
 export class CanonTower extends Tower {
     public name = 'Canon';
+    public description = 'Basic early game tower. Low cost, low damages.'
     public reloadDurationMs: number = 400;
     public damage: number = 25;
     public cost: number = 50;

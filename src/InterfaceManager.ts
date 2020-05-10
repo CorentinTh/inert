@@ -15,6 +15,7 @@ class InterfaceManager {
     private cashElement = document.getElementById('cash')!;
     private towersWrapperElement = document.getElementById('towers-wrapper')!;
     private towersStatsElement = document.getElementById('towers-stats')!;
+    private waveDelayElement = document.getElementById('delay')!;
     public snackbar = new Snackbar();
 
     constructor() {
@@ -25,6 +26,14 @@ class InterfaceManager {
 
     setWave(wave: number) {
         this.waveElement.textContent = String(wave);
+    }
+
+    setWaveDelay(sec: number) {
+        this.waveDelayElement.textContent = `(${sec}s)`;
+    }
+
+    clearWaveDelay(){
+        this.waveDelayElement.textContent = '';
     }
 
     setCash(cash: number) {
@@ -67,17 +76,17 @@ class InterfaceManager {
 
         const reloadDuration = tower.reloadDurationMs / 1000;
         const dps = typeof tower.damage === 'object' ?
-            `${tower.damage.min / reloadDuration} - ${tower.damage.max / reloadDuration}` :
+            `${(tower.damage.min / reloadDuration).toFixed(0)} - ${(tower.damage.max / reloadDuration).toFixed(0)}` :
             tower.damage / reloadDuration;
 
         this.towersStatsElement.innerHTML = `
             <div class="title">${tower.name}</div>
             <div class="description">${tower.description}</div>
-            <table>
-                <tr><td>Cost: </td><td>${tower.cost} ¢</td></tr>
-                <tr><td>Damage:</td><td>${damage}</td></tr>
-                <tr><td>Reload:</td><td>${reloadDuration.toFixed(3)} s</td></tr>
-                <tr><td title="Damage Per Second">DPS:</td><td>${dps}</td></tr>
+            <table class="table5050">
+                <tr><td>Cost: </td><td class="accent">${tower.cost} ¢</td></tr>
+                <tr><td>Damage:</td><td class="accent">${damage}</td></tr>
+                <tr><td>Reload:</td><td class="accent">${reloadDuration.toFixed(3)} s</td></tr>
+                <tr><td title="Damage Per Second">DPS:</td><td class="accent">${dps}</td></tr>
             </table>
         `
     }

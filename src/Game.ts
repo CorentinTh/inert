@@ -6,9 +6,8 @@ import {enemyManager} from "./EnemyManager";
 import {munitionManager} from "./MunitionManager";
 import {controls} from "./Controls";
 import {towerPlacer} from "./TowerPlacer";
-import {ArmoredEnemy} from "./entities/enemies/ArmoredEnemy";
 import './InterfaceManager';
-import {interfaceManager} from "./InterfaceManager";
+import './WavesManager';
 
 class Game {
 
@@ -19,12 +18,6 @@ class Game {
         map.on('added', () => {
             enemyManager.updatePaths()
         });
-
-        setInterval(() => {
-            if (controls.tabHasFocus()) {
-                enemyManager.add(new ArmoredEnemy(map.enemyBases[0]));
-            }
-        }, 300)
     }
 
     updateLoop() {

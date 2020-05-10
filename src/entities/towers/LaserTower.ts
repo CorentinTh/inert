@@ -8,12 +8,13 @@ import {LaserMunition} from "../munitions/LaserMunition";
 
 export class LaserTower extends Tower {
     public name = 'Laser';
-    public reloadDurationMs: number = 200;
+    public description = 'Laser tower beam focusing on one enemy. The longer the focus, the bigger the damages.'
+    public reloadDurationMs: number = 300;
     public damage = {
         max: 50,
         min: 20
     };
-    public cost: number = 50;
+    public cost: number = 300;
     private readonly radius: number;
     private canonLength: number;
     public target: Enemy | undefined;

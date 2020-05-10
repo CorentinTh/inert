@@ -12,6 +12,21 @@ const drawRoundedSquare = (ctx: CanvasRenderingContext2D, x: number, y: number, 
     ctx.closePath();
 }
 
+const drawPolygon = (ctx: CanvasRenderingContext2D, x: number, y: number, sides: number, radius: number) => {
+    const factor = 2 * Math.PI / sides;
+
+    ctx.beginPath();
+    ctx.moveTo(x + radius * Math.cos(0), y);
+
+    for (let i = 1; i <= sides; ++i) {
+        ctx.lineTo(x + radius * Math.cos(i * factor), y + radius * Math.sin(i * factor));
+    }
+
+    ctx.closePath();
+
+}
+
 export {
-    drawRoundedSquare
+    drawRoundedSquare,
+    drawPolygon
 }

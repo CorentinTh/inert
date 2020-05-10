@@ -24,6 +24,13 @@ export abstract class Enemy extends Renderable implements Point {
     private base: Base;
     private path: Point[] | false = false;
 
+    protected healthBar = {
+        yOffset: 12,
+        width: 20,
+        height: 3,
+        borderRadius: 3
+    }
+
     constructor(base: Base) {
         super(base.center.x, base.center.y);
         this.base = base;
@@ -71,10 +78,10 @@ export abstract class Enemy extends Renderable implements Point {
     drawHealthBar(ctx: CanvasRenderingContext2D) {
         const ratio = 1 - this.damageTaken / this.life;
         ctx.fillStyle = '#4a4a4e'
-        drawRoundedSquare(ctx, this.x - 10, this.y + 12, 20, 3, 3)
+        drawRoundedSquare(ctx, this.x - this.healthBar.width / 2, this.y + this.healthBar.yOffset, this.healthBar.width, this.healthBar.height, this.healthBar.borderRadius)
         ctx.fill()
         ctx.fillStyle = colors.enemyBase.primary
-        drawRoundedSquare(ctx, this.x - 10, this.y + 12, 20 * ratio, 3, 3)
+        drawRoundedSquare(ctx, this.x - this.healthBar.width / 2, this.y + this.healthBar.yOffset, this.healthBar.width * ratio, this.healthBar.height, this.healthBar.borderRadius)
         ctx.fill()
     }
 
