@@ -12,7 +12,7 @@ export abstract class Tower extends GridRenderable {
     abstract damage: number | { max: number, min: number };
     abstract cost: number;
     private countdown: number = 0;
-    protected canShoot: boolean = false;
+    protected canShoot: boolean = true;
     public traversable = false;
     abstract target: Enemy | undefined;
     abstract aimRadius: number;

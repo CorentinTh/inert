@@ -8,6 +8,7 @@ import {randIndex} from "./tools/helphers";
 import {enemyManager} from "./EnemyManager";
 import {EventEmitter} from "./tools/EventEmitter";
 import {GatlingTower} from "./entities/towers/GatlingTower";
+import {SniperTower} from "./entities/towers/SniperTower";
 
 class Map extends EventEmitter {
     public grid: (GridRenderable | 0 | 1)[][] = new Array(100).fill(0).map(() => new Array(40).fill(0));
@@ -18,9 +19,9 @@ class Map extends EventEmitter {
 
     constructor() {
         super();
-        this.addElement(9, 11, CanonTower)
-        this.addElement(9, 12, GatlingTower)
-        this.addElement(18, 3, CanonTower)
+        // this.addElement(9, 11, SniperTower)
+        // this.addElement(9, 12, GatlingTower)
+        this.addElement(18, 3, SniperTower)
 
         this.homeBase = this.addBase(10, 15, true);
         this.enemyBases.push(

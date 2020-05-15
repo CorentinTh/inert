@@ -45,7 +45,6 @@ class Controls extends EventEmitter {
 
     private createKeyDownHandler() {
         window.addEventListener('keydown', ({key}) => {
-            console.log('ee');
             this.emit(`keydown:${key.toUpperCase()}`);
         });
     }

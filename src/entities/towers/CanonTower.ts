@@ -3,7 +3,7 @@ import {PI2} from "../../tools/constants";
 import {Point} from "../../interfaces/Point";
 import {Enemy} from "../enemies/Enemy";
 import {munitionManager} from "../../MunitionManager";
-import {BulletMunition} from "../munitions/BulletMunition";
+import {BasicBulletMunition} from "../munitions/BasicBulletMunition";
 
 
 export class CanonTower extends Tower {
@@ -36,7 +36,7 @@ export class CanonTower extends Tower {
     }
 
     shoot() {
-        munitionManager.add(new BulletMunition(this.target!, this));
+        munitionManager.add(new BasicBulletMunition(this.target!, this));
         this.canonLength *= 0.8;
     }
 

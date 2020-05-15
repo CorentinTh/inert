@@ -1,9 +1,10 @@
 import {Munition} from "./Munition";
 import {PI2} from "../../tools/constants";
 
-export class BulletMunition extends Munition{
+export class BasicBulletMunition extends Munition{
     speed: number = 6;
-    private radius = 5
+    protected radius = 5
+    protected angle: number = 0;
 
     draw(ctx: CanvasRenderingContext2D): void {
         ctx.fillStyle = this.emitter.colors.primary
@@ -14,12 +15,12 @@ export class BulletMunition extends Munition{
 
     update() {
         if (this.target.alive) {
-            const angle = Math.atan2(this.target.y - this.y, this.target.x - this.x);
+            this.angle = Math.atan2(this.target.y - this.y, this.target.x - this.x);
             const nearEqualX = this.x >= this.target.x - this.speed && this.x <= this.target.x + this.speed;
             const nearEqualY = this.y >= this.target.y - this.speed && this.y <= this.target.y + this.speed;
 
-            this.x += Math.cos(angle) * this.speed;
-            this.y += Math.sin(angle) * this.speed;
+            this.x += Math.cos(this.angle) * this.speed;
+            this.y += Math.sin(this.angle) * this.speed;
 
             if (nearEqualX && nearEqualY) {
                 this.alive = false;
@@ -30,7 +31,7 @@ export class BulletMunition extends Munition{
         }
     }
 
-    private dealDamage() {
+    dealDamage() {
         if(typeof this.emitter.damage !== 'object'){
             this.target.takeDamage(this.emitter.damage);
         }

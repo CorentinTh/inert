@@ -1,7 +1,7 @@
 import {Tower} from "./Tower";
 import {Enemy} from "../enemies/Enemy";
 import {munitionManager} from "../../MunitionManager";
-import {BulletMunition} from "../munitions/BulletMunition";
+import {BasicBulletMunition} from "../munitions/BasicBulletMunition";
 import {PI2} from "../../tools/constants";
 import {LaserMunition} from "../munitions/LaserMunition";
 
@@ -23,6 +23,7 @@ export class LaserTower extends Tower {
         primary: '#7f8c8d',
         secondary: '#95a5a6'
     };
+
     private angle: number = 0;
 
     constructor(x: number, y: number, width: number) {
@@ -39,8 +40,6 @@ export class LaserTower extends Tower {
     }
 
     update() {
-        this.canonLength = this.halfWidth * 1.2;
-
         super.update();
 
         if (this.target) {

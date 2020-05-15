@@ -11,12 +11,10 @@ class Canvas extends EventEmitter{
         this.canvasElement.tabIndex = 1;
         this.ctx = this.canvasElement.getContext('2d')!;
         this.ctx.lineCap = 'round';
-        this.ctx.lineJoin = "round";
+        this.ctx.lineJoin = 'round';
 
         this.resize()
 
-        const m = this.ctx.getTransform();
-        console.log(m);
         window.addEventListener('resize', this.resize.bind(this))
         // this.canvasElement.addEventListener('wheel', this.handleScroll.bind(this))
     }

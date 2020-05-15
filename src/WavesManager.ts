@@ -38,7 +38,6 @@ class WavesManager {
                     for (let k = 0; k < map.enemyBases.length; ++k) {
                         let base = map.enemyBases[k];
                         enemyManager.add(this.enemyFactory(enemyClass, enemySpecsMultiplier, base));
-                        console.log(enemyManager);
                     }
                     await asyncSleep(delay)
                 }
