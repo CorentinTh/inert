@@ -8,6 +8,7 @@ import {GridRenderable} from "./interfaces/GridRenderable";
 import {towerPlacer} from "./TowerPlacer";
 import {Snackbar} from "./tools/Snackbar";
 import {LaserTower} from "./entities/towers/LaserTower";
+import {SlowTower} from "./entities/towers/SlowTower";
 
 class InterfaceManager {
     private versionElement = document.getElementById('version')!;
@@ -44,6 +45,7 @@ class InterfaceManager {
         const towers = [
             CanonTower,
             GatlingTower,
+            SlowTower,
             SniperTower,
             LaserTower
         ];
@@ -84,9 +86,12 @@ class InterfaceManager {
             <div class="description">${tower.description}</div>
             <table class="table5050">
                 <tr><td>Cost: </td><td class="accent">${tower.cost} ¢</td></tr>
-                <tr><td>Damage:</td><td class="accent">${damage}</td></tr>
-                <tr><td>Reload:</td><td class="accent">${reloadDuration.toFixed(3)} s</td></tr>
-                <tr><td title="Damage Per Second">DPS:</td><td class="accent">${dps}</td></tr>
+                <tr><td>Aim radius:</td><td class="accent">${tower.aimRadius}</td></tr>
+                ${ tower.damage > 0 ? `
+                    <tr><td>Damage:</td><td class="accent">${damage}</td></tr>
+                    <tr><td>Reload:</td><td class="accent">${reloadDuration.toFixed(3)} s</td></tr>
+                    <tr><td title="Damage Per Second">DPS:</td><td class="accent">${dps}</td></tr>
+                ` : ''}
             </table>
         `
     }

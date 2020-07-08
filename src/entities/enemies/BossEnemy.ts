@@ -10,7 +10,7 @@ export class BossEnemy extends Enemy {
     life: number = 1000;
     speed: number = 2.5;
     cash: number = 100;
-    private radius = Map.TILE_SIZE * 0.4
+    radius = Map.TILE_SIZE * 0.4
 
 
     constructor(base: Base) {

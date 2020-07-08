@@ -11,7 +11,7 @@ export class SniperTower extends Tower {
     colors = {primary: '#f39c12', secondary: '#f1c40f'};
     damage: number = 300;
     reloadDurationMs: number = 3000;
-    description: string = "";
+    description: string = "Huge range, huge damages, but slow reload.";
     target: Enemy | undefined;
     radius: number = this.halfWidth * 0.9
     private angle: number = 0;

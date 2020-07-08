@@ -5,24 +5,20 @@ import {map, Map} from "../../Map";
 import {colors} from "../../config.json"
 import {drawRoundedSquare} from "../../tools/shapes";
 import {cashManager} from "../../CashManager";
+import {Effect} from "../effects/Effect";
 
-let path = map.getPathFromGridCell(map.enemyBases[0].i, map.enemyBases[0].j)
-if (path) {
-    path = path.map(value => ({
-        x: value.x * Map.TILE_SIZE + Map.TILE_SIZE / 2,
-        y: value.y * Map.TILE_SIZE + Map.TILE_SIZE / 2
-    }))
-}
 
 export abstract class Enemy extends Renderable implements Point {
     abstract speed: number;
     abstract life: number;
     abstract cash: number;
+    abstract radius: number;
     private damageTaken: number = 0;
     private targetIndex: number = 1;
     public alive = true;
     private base: Base;
     private path: Point[] | false = false;
+    private effects : Effect[] = [];
 
     protected healthBar = {
         yOffset: 12,
@@ -42,8 +38,8 @@ export abstract class Enemy extends Renderable implements Point {
         this.targetIndex = 1
     }
 
-
     update() {
+        this.effects.forEach(e => e.update());
 
         if (this.path) {
             const target = this.path[this.targetIndex];
@@ -86,8 +82,10 @@ export abstract class Enemy extends Renderable implements Point {
     }
 
     draw(ctx: CanvasRenderingContext2D): void {
+        this.effects.forEach(e => e.draw(ctx));
+
         if (this.damageTaken > 0) {
-            this.drawHealthBar(ctx)
+            this.drawHealthBar(ctx);
         }
     }
 
@@ -110,4 +108,19 @@ export abstract class Enemy extends Renderable implements Point {
     private onDie() {
         cashManager.add(this.cash);
     }
+
+    addEffect(effect: { new(e:Enemy): Effect }) {
+        const existingEffect = this.effects.find(e => e.constructor.name === effect.name);
+
+        if(existingEffect){
+            existingEffect.restart();
+        }else{
+            const e = new effect(this);
+            const i = this.effects.push(e) - 1;
+            e.onUnmount(() => {
+                this.effects.splice(i,1);
+            });
+        }
+    }
+
 }

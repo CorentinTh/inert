@@ -26,6 +26,12 @@ class EnemyManager extends EntityRenderer<Enemy> {
         return closestEnemy
     }
 
+    getAllInRadius(x: number, y: number, radius: number) {
+        const distanceSquared = radius * radius;
+        return this.entities.filter(e => euclideanDistanceSquared(e.x, e.y, x, y) <= distanceSquared);
+    }
+
+
     update() {
         for (let i = this.entities.length - 1; i >= 0; --i) {
             const enemy = this.entities[i];

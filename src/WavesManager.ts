@@ -1,4 +1,3 @@
-import {controls} from "./Controls";
 import {enemyManager} from "./EnemyManager";
 import {BossEnemy} from "./entities/enemies/BossEnemy";
 import {map} from "./Map";
@@ -7,6 +6,8 @@ import {interfaceManager} from "./InterfaceManager";
 import {Enemy} from "./entities/enemies/Enemy";
 import {Base} from "./entities/terrain/Base";
 import {SimpleEnemy} from "./entities/enemies/SimpleEnemy";
+import {ArmoredEnemy} from "./entities/enemies/ArmoredEnemy";
+import {FastEnemy} from "./entities/enemies/FastEnemy";
 
 interface WaveGroup {
     enemyClass: { new(base: Base): Enemy },
@@ -18,7 +19,7 @@ interface WaveGroup {
 type Wave = WaveGroup[]
 
 class WavesManager {
-    private delayBetweenWaves = 10; //sec
+    private delayBetweenWaves = 7; //sec
     public waveCounter = 1
     private looping = true;
 
@@ -65,45 +66,59 @@ class WavesManager {
         const ratio = 1 + this.waveCounter / 10;
 
 
-        if (this.waveCounter <= 10) {
+        if (this.waveCounter % 10 === 0) {
+            wave.push({
+                enemyClass: BossEnemy,
+                enemySpecsMultiplier: {
+                    life: ratio,
+                },
+                quantity: this.waveCounter / 10,
+                delay: 500
+            })
+        } else if (this.isOnWave({below: 4})) {
             wave.push({
                 enemyClass: SimpleEnemy,
                 enemySpecsMultiplier: {
-                    life: ratio,
-                    speed: ratio
+                    life: ratio
                 },
-                quantity: 10,
+                quantity: 9 + this.waveCounter,
                 delay: 500
             })
         } else {
-
-            if (this.waveCounter % 5 === 0){
+            if(Math.random() > 0.7){
                 wave.push({
-                    enemyClass: SimpleEnemy,
+                    enemyClass: FastEnemy,
                     enemySpecsMultiplier: {
                         life: ratio,
+                        speed: Math.min(ratio, 1.5)
                     },
-                    quantity: this.waveCounter / 5,
-                    delay: 500
+                    quantity: 2 + this.waveCounter / 5,
+                    delay: 200
                 })
             }
 
-            if (this.waveCounter % 5 === 0){
-                wave.push({
-                    enemyClass: SimpleEnemy,
-                    enemySpecsMultiplier: {
-                        life: ratio,
-                    },
-                    quantity: this.waveCounter / 5,
-                    delay: 500
-                })
-            }
+            wave.push({
+                enemyClass: ArmoredEnemy,
+                enemySpecsMultiplier: {
+                    life: ratio,
+                },
+                quantity: 10 + this.waveCounter,
+                delay: 500
+            })
 
         }
 
 
-
         return wave;
+    }
+
+    isOnWave(config: { above?: number, below?: number, rand?: number }) {
+        let result = true;
+
+        if (config.above) result = result && this.waveCounter > config.above;
+        if (config.below) result = result && this.waveCounter < config.below;
+
+        return result;
     }
 }
 

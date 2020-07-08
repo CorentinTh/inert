@@ -63,7 +63,7 @@ body {
   }
 
   .controls {
-    width: 300px;
+    width: 330px;
     padding: 15px;
     z-index: 2;
     background-color: rgba(52, 52, 52, 0.5);
@@ -128,10 +128,19 @@ body {
 
     .towers {
       #towers-wrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+
         canvas {
           border: 1px solid #575757;
           border-right-width: 0;
           cursor: pointer;
+
+          &:hover{
+            background-color: rgba(52, 52, 52, 0.8);
+          }
 
           &:first-child {
             border-top-left-radius: 5px;
