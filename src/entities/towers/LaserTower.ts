@@ -13,7 +13,7 @@ export class LaserTower extends Tower {
         max: 50,
         min: 20
     };
-    public cost: number = 300;
+    public cost: number = 400;
     private readonly radius: number;
     private canonLength: number;
     public target: Enemy | undefined;
