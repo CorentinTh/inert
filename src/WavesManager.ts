@@ -27,8 +27,6 @@ class WavesManager {
         this.wavesLoop()
     }
 
-
-
     private async wavesLoop() {
         while (this.looping) {
             const wave = this.generateWave()
