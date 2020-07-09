@@ -8,6 +8,7 @@ import {towerPlacer} from "./TowerPlacer";
 import {Snackbar} from "./tools/Snackbar";
 import {LaserTower} from "./entities/towers/LaserTower";
 import {SlowTower} from "./entities/towers/SlowTower";
+import {controls} from "./Controls";
 
 class InterfaceManager {
     private versionElement = document.getElementById('version')!;
@@ -21,8 +22,19 @@ class InterfaceManager {
 
     constructor() {
         this.versionElement.textContent = 'v' + version;
-
+        controls.on('focusout', this.showFocusLost.bind(this));
+        controls.on('focusin', this.hideFocusLost.bind(this));
         this.setTowers()
+    }
+
+    showFocusLost(){
+        this.snackbar.hide();
+        this.snackbar.setText('Focus as been lost, click on the window to continue.');
+        this.snackbar.show()
+    }
+
+    hideFocusLost(){
+        this.snackbar.hide();
     }
 
     setWave(wave: number) {
