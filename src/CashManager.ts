@@ -8,17 +8,17 @@ class CashManager {
         interfaceManager.setCash(this.balance);
     }
 
-    add(amount: number){
+    add(amount: number) {
         this.balance += amount;
         interfaceManager.setCash(this.balance);
     }
 
-    canWithdraw(amount: number){
+    canWithdraw(amount: number) {
         return this.balance - amount >= 0;
     }
 
-    withdraw(amount: number){
-        if (this.canWithdraw(amount)){
+    withdraw(amount: number) {
+        if (this.canWithdraw(amount)) {
             this.balance -= amount
             interfaceManager.setCash(this.balance);
         }

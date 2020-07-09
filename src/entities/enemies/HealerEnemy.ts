@@ -1,16 +1,15 @@
 import {Enemy} from "./Enemy";
 import {PI2} from "../../tools/constants";
-import {colors} from "../../config.json"
 import {Map} from "../../Map";
 import {enemyManager} from "../../EnemyManager";
 import {HealEffect} from "../effects/HealEffect";
 
-export class HealerEnemy extends Enemy{
+export class HealerEnemy extends Enemy {
     life: number = 200;
     speed: number = 2.5;
     cash: number = 10;
     radius = 8;
-    healRadius = Map.TILE_SIZE ;
+    healRadius = Map.TILE_SIZE;
     enemiesInHealRadius: Enemy[] = [];
 
     draw(ctx: CanvasRenderingContext2D): void {
@@ -29,7 +28,7 @@ export class HealerEnemy extends Enemy{
         ctx.beginPath();
 
         this.enemiesInHealRadius.forEach(e => {
-            if(e.damageTaken > 0){
+            if (e.damageTaken > 0) {
                 ctx.moveTo(this.x, this.y);
                 ctx.lineTo(e.x, e.y);
                 ctx.stroke();

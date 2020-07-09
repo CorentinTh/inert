@@ -1,7 +1,7 @@
 import {EntityRenderer} from "./interfaces/EntityRenderer";
 import {Munition} from "./entities/munitions/Munition";
 
-class MunitionManager extends EntityRenderer<Munition>{
+class MunitionManager extends EntityRenderer<Munition> {
 
     update() {
         super.update();

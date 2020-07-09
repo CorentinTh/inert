@@ -1,7 +1,7 @@
 import {enemyManager} from "./EnemyManager";
 import {BossEnemy} from "./entities/enemies/BossEnemy";
 import {map} from "./Map";
-import {asyncSleep, asyncSleepIntervalSecond, rand, randIndex} from "./tools/helphers";
+import {asyncSleep, asyncSleepIntervalSecond, rand} from "./tools/helphers";
 import {interfaceManager} from "./InterfaceManager";
 import {Enemy} from "./entities/enemies/Enemy";
 import {Base} from "./entities/terrain/Base";
@@ -80,7 +80,7 @@ class WavesManager {
             })
 
             if (Math.random() > 0.6) {
-                wave.push( {
+                wave.push({
                     enemyClass: HealerEnemy,
                     enemySpecsMultiplier: {
                         life: ratio,
@@ -113,7 +113,7 @@ class WavesManager {
 
             if (Math.random() > 0.6) {
                 const quantity = 10 + this.waveCounter
-                const split = rand(0, quantity/3);
+                const split = rand(0, quantity / 3);
 
                 for (let i = 0; i < split; ++i) {
                     wave.push({
@@ -125,7 +125,7 @@ class WavesManager {
                         delay: 500
                     });
 
-                    wave.push( {
+                    wave.push({
                         enemyClass: HealerEnemy,
                         enemySpecsMultiplier: {
                             life: ratio,
@@ -134,7 +134,7 @@ class WavesManager {
                         delay: 400
                     })
                 }
-            }else{
+            } else {
                 wave.push({
                     enemyClass: ArmoredEnemy,
                     enemySpecsMultiplier: {

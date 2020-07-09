@@ -1,7 +1,6 @@
 import {Effect} from "./Effect";
 import {Enemy} from "../enemies/Enemy";
 import {fps} from "../../config.json";
-import {PI2} from "../../tools/constants";
 
 const frameDuration = 1000 / fps;
 

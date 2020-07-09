@@ -1,6 +1,6 @@
 import {BasicBulletMunition} from "./BasicBulletMunition";
 
-export class SniperBulletMunition extends BasicBulletMunition{
+export class SniperBulletMunition extends BasicBulletMunition {
     private counter = 2;
 
     update() {

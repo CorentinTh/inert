@@ -18,7 +18,7 @@ export class Timer {
         return this;
     }
 
-    clear(){
+    clear() {
         clearTimeout(this.timerID);
         return this;
     }

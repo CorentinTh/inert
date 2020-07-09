@@ -1,13 +1,8 @@
 import {Tower} from "./Tower";
-import {PI2} from "../../tools/constants";
-import {Point} from "../../interfaces/Point";
 import {Enemy} from "../enemies/Enemy";
-import {munitionManager} from "../../MunitionManager";
-import {BasicBulletMunition} from "../munitions/BasicBulletMunition";
 import {drawPolygon} from "../../tools/shapes";
 import {enemyManager} from "../../EnemyManager";
 import {SlowEffect} from "../effects/SlowEffect";
-import {fps} from "../../config.json";
 
 
 export class SlowTower extends Tower {
@@ -20,7 +15,7 @@ export class SlowTower extends Tower {
     public target: Enemy | undefined;
     public aimRadius: number;
     public colors = {
-        primary: '#bcc1c4',    
+        primary: '#bcc1c4',
         secondary: '#e6e9ea'
     };
     private radius: number;

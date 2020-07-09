@@ -6,27 +6,27 @@ export class Snackbar {
         this.element = document.getElementById(snackbarID)!;
     }
 
-    show(){
+    show() {
         this.element.classList.remove('hide');
         this.element.classList.add('show');
     }
 
-    hide(){
+    hide() {
         this.element.classList.remove('show');
         this.element.classList.add('hide');
     }
 
-    setText(text:string){
+    setText(text: string) {
         this.element.innerText = text;
     }
 
-    clearTimeout(){
-        if(this.timeoutID){
+    clearTimeout() {
+        if (this.timeoutID) {
             clearTimeout(this.timeoutID);
         }
     }
 
-    toast(text:string, duration:number = 3000){
+    toast(text: string, duration: number = 3000) {
         this.clearTimeout();
         this.hide();
         this.setText(text);

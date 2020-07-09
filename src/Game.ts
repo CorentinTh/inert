@@ -13,7 +13,7 @@ import {waveManager} from "./WavesManager";
 
 class Game {
     private updateInterval: number;
-    private looping:boolean = true;
+    private looping: boolean = true;
 
     constructor() {
         this.updateInterval = setInterval(this.updateLoop.bind(this), 1000 / fps);
@@ -41,7 +41,7 @@ class Game {
         map.draw(ctx);
         towerPlacer.draw(ctx);
 
-        if(this.looping){
+        if (this.looping) {
             requestAnimationFrame(this.drawLoop.bind(this))
         }
     }

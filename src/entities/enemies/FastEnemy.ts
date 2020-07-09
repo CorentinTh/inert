@@ -2,7 +2,7 @@ import {Enemy} from "./Enemy";
 import {PI2} from "../../tools/constants";
 import {colors} from "../../config.json"
 
-export class FastEnemy extends Enemy{
+export class FastEnemy extends Enemy {
     life: number = 200;
     speed: number = 4;
     cash: number = 20;

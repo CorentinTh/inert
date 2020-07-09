@@ -1,7 +1,6 @@
 import {GridRenderable} from "../../interfaces/GridRenderable";
 import {drawRoundedSquare} from "../../tools/shapes";
 import {colors} from "../../config.json";
-import {interfaceManager} from "../../InterfaceManager";
 import {game} from "../../Game";
 import {Map} from "../../Map";
 
@@ -33,13 +32,13 @@ export class Base extends GridRenderable {
         ctx.stroke();
         ctx.fill();
 
-        if (this.isHome && this.life < this.maxLife){
+        if (this.isHome && this.life < this.maxLife) {
             this.drawHealthBar(ctx);
         }
     }
 
-    handleDamage(){
-        if(--this.life <= 0){
+    handleDamage() {
+        if (--this.life <= 0) {
             game.gameOver();
         }
     }
@@ -50,7 +49,7 @@ export class Base extends GridRenderable {
         drawRoundedSquare(ctx, this.center.x - this.healthBar.width / 2, this.center.y + this.healthBar.yOffset, this.healthBar.width, this.healthBar.height, this.healthBar.borderRadius)
         ctx.fill()
 
-        if(this.life > 0){
+        if (this.life > 0) {
             ctx.fillStyle = this.colors.primary
             drawRoundedSquare(ctx, this.center.x - this.healthBar.width / 2, this.center.y + this.healthBar.yOffset, this.healthBar.width * ratio, this.healthBar.height, this.healthBar.borderRadius)
             ctx.fill()

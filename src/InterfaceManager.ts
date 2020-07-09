@@ -4,7 +4,6 @@ import {GatlingTower} from "./entities/towers/GatlingTower";
 import {Tower} from "./entities/towers/Tower";
 import {SniperTower} from "./entities/towers/SniperTower";
 import {Map} from "./Map";
-import {GridRenderable} from "./interfaces/GridRenderable";
 import {towerPlacer} from "./TowerPlacer";
 import {Snackbar} from "./tools/Snackbar";
 import {LaserTower} from "./entities/towers/LaserTower";
@@ -34,7 +33,7 @@ class InterfaceManager {
         this.waveDelayElement.textContent = `(${sec}s)`;
     }
 
-    clearWaveDelay(){
+    clearWaveDelay() {
         this.waveDelayElement.textContent = '';
     }
 
@@ -88,7 +87,7 @@ class InterfaceManager {
             <table class="table5050">
                 <tr><td>Cost: </td><td class="accent">${tower.cost} ¢</td></tr>
                 <tr><td>Aim radius:</td><td class="accent">${tower.aimRadius}</td></tr>
-                ${ tower.damage > 0 ? `
+                ${tower.damage > 0 ? `
                     <tr><td>Damage:</td><td class="accent">${damage}</td></tr>
                     <tr><td>Reload:</td><td class="accent">${reloadDuration.toFixed(3)} s</td></tr>
                     <tr><td title="Damage Per Second">DPS:</td><td class="accent">${dps}</td></tr>

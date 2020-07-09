@@ -29,7 +29,8 @@ class Map extends EventEmitter {
             this.addElement(randIndex(this.grid), randIndex(this.grid[0]), Rock)
         }
     }
-    drawGrid(ctx: CanvasRenderingContext2D){
+
+    drawGrid(ctx: CanvasRenderingContext2D) {
         ctx.strokeStyle = "#25272b";
         ctx.lineWidth = 1;
 

@@ -1,7 +1,6 @@
 import {EntityRenderer} from "./interfaces/EntityRenderer";
 import {Enemy} from "./entities/enemies/Enemy";
 import {euclideanDistanceSquared} from "./tools/helphers";
-import {map} from "./Map";
 
 class EnemyManager extends EntityRenderer<Enemy> {
     constructor() {

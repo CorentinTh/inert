@@ -39,7 +39,7 @@ export abstract class Tower extends GridRenderable {
             this.targetInRange = false;
         } else if (this.target && euclideanDistanceSquared(this.center.x, this.center.y, this.target.x, this.target.y) < this.aimRadius * this.aimRadius) {
             // Target in range
-            if(!this.targetInRange){
+            if (!this.targetInRange) {
                 this.onNewTargetInRange();
                 this.targetInRange = true;
             }
@@ -71,7 +71,9 @@ export abstract class Tower extends GridRenderable {
         }
     }
 
-    protected shoot(){}
+    protected shoot() {
+    }
 
-    protected onNewTargetInRange() {}
+    protected onNewTargetInRange() {
+    }
 }

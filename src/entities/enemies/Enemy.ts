@@ -19,7 +19,7 @@ export abstract class Enemy extends Renderable implements Point {
     public alive = true;
     private base: Base;
     private path: Point[] | false = false;
-    private effects : Effect[] = [];
+    private effects: Effect[] = [];
 
     protected healthBar = {
         yOffset: 12,
@@ -110,20 +110,20 @@ export abstract class Enemy extends Renderable implements Point {
         cashManager.add(this.cash);
     }
 
-    heal(amount: number){
+    heal(amount: number) {
         this.damageTaken = Math.max(this.damageTaken - amount, 0);
     }
 
-    addEffect(effect: { new(e:Enemy): Effect }) {
+    addEffect(effect: { new(e: Enemy): Effect }) {
         const existingEffect = this.effects.find(e => e.constructor.name === effect.name);
 
-        if(existingEffect){
+        if (existingEffect) {
             existingEffect.restart();
-        }else{
+        } else {
             const e = new effect(this);
             const i = this.effects.push(e) - 1;
             e.onUnmount(() => {
-                this.effects.splice(i,1);
+                this.effects.splice(i, 1);
             });
         }
     }

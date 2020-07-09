@@ -1,5 +1,4 @@
 import {GridRenderable} from "../../interfaces/GridRenderable";
-import {ctx} from "../../Canvas";
 import {drawRoundedSquare} from "../../tools/shapes";
 
 export class Rock extends GridRenderable {

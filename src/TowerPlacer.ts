@@ -19,10 +19,10 @@ class TowerPlacer extends Renderable {
 
         controls.on('click', () => {
             if (this.placing && this.canBePlaced()) {
-                if(cashManager.canWithdraw(this.tower.cost)){
+                if (cashManager.canWithdraw(this.tower.cost)) {
                     cashManager.withdraw(this.tower.cost)
                     map.addElement(this.i, this.j, <new (...args: any[]) => GridRenderable>this.tower.constructor);
-                }else{
+                } else {
                     interfaceManager.snackbar.toast('You don\'t have enought money to buy this tower');
                 }
             }

@@ -1,5 +1,4 @@
 import {Enemy} from "./Enemy";
-import {PI2} from "../../tools/constants";
 import {colors} from "../../config.json"
 import {Map} from "../../Map";
 import {drawPolygon} from "../../tools/shapes";

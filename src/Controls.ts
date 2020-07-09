@@ -49,7 +49,7 @@ class Controls extends EventEmitter {
         });
     }
 
-    tabHasFocus(){
+    tabHasFocus() {
         return document.hasFocus()
     }
 }

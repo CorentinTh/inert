@@ -1,7 +1,7 @@
 import {Munition} from "./Munition";
 import {PI2} from "../../tools/constants";
 
-export class BasicBulletMunition extends Munition{
+export class BasicBulletMunition extends Munition {
     speed: number = 6;
     protected radius = 5
     protected angle: number = 0;
@@ -32,7 +32,7 @@ export class BasicBulletMunition extends Munition{
     }
 
     dealDamage() {
-        if(typeof this.emitter.damage !== 'object'){
+        if (typeof this.emitter.damage !== 'object') {
             this.target.takeDamage(this.emitter.damage);
         }
     }

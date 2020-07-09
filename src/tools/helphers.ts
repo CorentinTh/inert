@@ -17,13 +17,14 @@ const asyncSleep = (delayMs: number) => {
         controls.on('focusout', () => timer.pause())
         controls.on('focusin', () => timer.resume())
 
-        if (!controls.tabHasFocus()){
+        if (!controls.tabHasFocus()) {
             timer.pause()
         }
     });
 }
 
-const asyncSleepIntervalSecond = (delaySec: number, callback: (remainingSeconds: number) => void = () => {}) => {
+const asyncSleepIntervalSecond = (delaySec: number, callback: (remainingSeconds: number) => void = () => {
+}) => {
     callback(delaySec);
 
     return new Promise(resolve => {

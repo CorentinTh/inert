@@ -82,7 +82,7 @@ export class CanonTower extends Tower {
         super.setCoordinates(x, y);
 
         this.canonExtremity = {
-            x: this.center.x  + this.canonLength,
+            x: this.center.x + this.canonLength,
             y: this.center.y
         }
     }

@@ -44,7 +44,7 @@ export class SniperTower extends Tower {
         ctx.beginPath()
         ctx.lineWidth = 8;
         ctx.moveTo(this.center.x, this.center.y);
-        ctx.lineTo(this.center.x +25, this.center.y)
+        ctx.lineTo(this.center.x + 25, this.center.y)
         ctx.stroke()
 
         ctx.lineWidth = 4;

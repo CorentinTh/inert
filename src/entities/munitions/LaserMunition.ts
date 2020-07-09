@@ -17,7 +17,7 @@ export class LaserMunition extends Munition {
         ctx.lineWidth = 2 + 2 * this.charge
         ctx.shadowColor = 'red'
         ctx.shadowBlur = 3 + 5 * this.charge
-        ctx.globalAlpha = this.charge +0.1
+        ctx.globalAlpha = this.charge + 0.1
         ctx.beginPath();
         ctx.moveTo(this.emitter.center.x, this.emitter.center.y)
         ctx.lineTo(this.target.x, this.target.y);

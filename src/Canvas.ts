@@ -1,7 +1,7 @@
 import {EventEmitter} from "./tools/EventEmitter";
 import {colors} from "./config.json"
 
-class Canvas extends EventEmitter{
+class Canvas extends EventEmitter {
     private readonly ctx: CanvasRenderingContext2D;
     private readonly canvasElement: HTMLCanvasElement;
 
@@ -37,7 +37,7 @@ class Canvas extends EventEmitter{
     clear() {
         // this.ctx.clearRect(0,0, this.canvasElement.width, this.canvasElement.height);
         this.ctx.fillStyle = colors.background;
-        this.ctx.fillRect(0,0, this.canvasElement.width, this.canvasElement.height);
+        this.ctx.fillRect(0, 0, this.canvasElement.width, this.canvasElement.height);
     }
 }
 
