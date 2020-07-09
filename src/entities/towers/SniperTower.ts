@@ -7,7 +7,7 @@ import {SniperBulletMunition} from "../munitions/SniperBulletMunition";
 export class SniperTower extends Tower {
     public name = 'Sniper';
     aimRadius: number = 250;
-    cost: number = 10;
+    cost: number = 200;
     colors = {primary: '#f39c12', secondary: '#f1c40f'};
     damage: number = 300;
     reloadDurationMs: number = 3000;

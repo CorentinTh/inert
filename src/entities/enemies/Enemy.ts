@@ -14,7 +14,7 @@ export abstract class Enemy extends Renderable implements Point {
     abstract cash: number;
     abstract radius: number;
     protected damage: number = 10;
-    private damageTaken: number = 0;
+    damageTaken: number = 0;
     private targetIndex: number = 1;
     public alive = true;
     private base: Base;
@@ -108,6 +108,10 @@ export abstract class Enemy extends Renderable implements Point {
 
     private onDie() {
         cashManager.add(this.cash);
+    }
+
+    heal(amount: number){
+        this.damageTaken = Math.max(this.damageTaken - amount, 0);
     }
 
     addEffect(effect: { new(e:Enemy): Effect }) {

@@ -1,5 +1,5 @@
 {
-  "initialBalance": 1000,
+  "initialBalance": 200,
   "fps": 30,
   "containerID": "game-wrapper",
   "colors": {

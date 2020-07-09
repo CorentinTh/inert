@@ -15,7 +15,7 @@ export class SlowTower extends Tower {
     public description = 'Tower that slows enemies.'
     public reloadDurationMs: number = 0;
     public damage: number = 0;
-    public cost: number = 50;
+    public cost: number = 150;
 
     public target: Enemy | undefined;
     public aimRadius: number;

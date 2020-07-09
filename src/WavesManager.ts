@@ -1,13 +1,14 @@
 import {enemyManager} from "./EnemyManager";
 import {BossEnemy} from "./entities/enemies/BossEnemy";
 import {map} from "./Map";
-import {asyncSleep, asyncSleepIntervalSecond} from "./tools/helphers";
+import {asyncSleep, asyncSleepIntervalSecond, rand, randIndex} from "./tools/helphers";
 import {interfaceManager} from "./InterfaceManager";
 import {Enemy} from "./entities/enemies/Enemy";
 import {Base} from "./entities/terrain/Base";
 import {SimpleEnemy} from "./entities/enemies/SimpleEnemy";
 import {ArmoredEnemy} from "./entities/enemies/ArmoredEnemy";
 import {FastEnemy} from "./entities/enemies/FastEnemy";
+import {HealerEnemy} from "./entities/enemies/HealerEnemy";
 
 interface WaveGroup {
     enemyClass: { new(base: Base): Enemy },
@@ -31,22 +32,22 @@ class WavesManager {
         while (this.looping) {
             const wave = this.generateWave()
 
-            if(!this.looping) break;
+            if (!this.looping) break;
             for (let i = 0; i < wave.length; ++i) {
-                if(!this.looping) break;
+                if (!this.looping) break;
                 let {enemyClass, enemySpecsMultiplier, quantity, delay} = wave[i];
 
                 for (let j = 0; j < quantity; ++j) {
-                    if(!this.looping) break;
+                    if (!this.looping) break;
                     for (let k = 0; k < map.enemyBases.length; ++k) {
-                        if(!this.looping) break;
+                        if (!this.looping) break;
                         let base = map.enemyBases[k];
                         enemyManager.add(this.enemyFactory(enemyClass, enemySpecsMultiplier, base));
                     }
                     await asyncSleep(delay)
                 }
             }
-            if(!this.looping) break;
+            if (!this.looping) break;
             await asyncSleepIntervalSecond(this.delayBetweenWaves, interfaceManager.setWaveDelay.bind(interfaceManager))
             interfaceManager.clearWaveDelay();
             interfaceManager.setWave(++this.waveCounter);
@@ -68,7 +69,6 @@ class WavesManager {
         const wave = [];
         const ratio = 1 + this.waveCounter / 10;
 
-
         if (this.waveCounter % 10 === 0) {
             wave.push({
                 enemyClass: BossEnemy,
@@ -76,8 +76,19 @@ class WavesManager {
                     life: ratio,
                 },
                 quantity: this.waveCounter / 10,
-                delay: 500
+                delay: 300
             })
+
+            if (Math.random() > 0.6) {
+                wave.push( {
+                    enemyClass: HealerEnemy,
+                    enemySpecsMultiplier: {
+                        life: ratio,
+                    },
+                    quantity: 1 + rand(0, this.waveCounter / 10),
+                    delay: 300
+                })
+            }
         } else if (this.isOnWave({below: 4})) {
             wave.push({
                 enemyClass: SimpleEnemy,
@@ -88,7 +99,7 @@ class WavesManager {
                 delay: 500
             })
         } else {
-            if(Math.random() > 0.7){
+            if (Math.random() > 0.7) {
                 wave.push({
                     enemyClass: FastEnemy,
                     enemySpecsMultiplier: {
@@ -100,14 +111,39 @@ class WavesManager {
                 })
             }
 
-            wave.push({
-                enemyClass: ArmoredEnemy,
-                enemySpecsMultiplier: {
-                    life: ratio,
-                },
-                quantity: 10 + this.waveCounter,
-                delay: 500
-            })
+            if (Math.random() > 0.6) {
+                const quantity = 10 + this.waveCounter
+                const split = rand(0, quantity/3);
+
+                for (let i = 0; i < split; ++i) {
+                    wave.push({
+                        enemyClass: ArmoredEnemy,
+                        enemySpecsMultiplier: {
+                            life: ratio,
+                        },
+                        quantity: quantity / split,
+                        delay: 500
+                    });
+
+                    wave.push( {
+                        enemyClass: HealerEnemy,
+                        enemySpecsMultiplier: {
+                            life: ratio,
+                        },
+                        quantity: 1,
+                        delay: 400
+                    })
+                }
+            }else{
+                wave.push({
+                    enemyClass: ArmoredEnemy,
+                    enemySpecsMultiplier: {
+                        life: ratio,
+                    },
+                    quantity: 10 + this.waveCounter,
+                    delay: 500
+                })
+            }
 
         }
 

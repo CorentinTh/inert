@@ -37,8 +37,8 @@ class Game {
         canvas.clear();
         map.drawGrid(ctx);
         munitionManager.draw(ctx);
-        map.draw(ctx);
         enemyManager.draw(ctx);
+        map.draw(ctx);
         towerPlacer.draw(ctx);
 
         if(this.looping){

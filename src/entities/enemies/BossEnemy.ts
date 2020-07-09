@@ -7,7 +7,7 @@ import {Base} from "../terrain/Base";
 
 
 export class BossEnemy extends Enemy {
-    life: number = 1000;
+    life: number = 2000;
     speed: number = 2.5;
     cash: number = 100;
     radius = Map.TILE_SIZE * 0.4
