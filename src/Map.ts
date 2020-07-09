@@ -1,4 +1,3 @@
-import {CanonTower} from "./entities/towers/CanonTower";
 import {Base} from "./entities/terrain/Base";
 import {GridRenderable} from "./interfaces/GridRenderable";
 import {Rock} from "./entities/terrain/Rock";
@@ -7,8 +6,6 @@ import {easyAStar} from "./tools/astar";
 import {randIndex} from "./tools/helphers";
 import {enemyManager} from "./EnemyManager";
 import {EventEmitter} from "./tools/EventEmitter";
-import {GatlingTower} from "./entities/towers/GatlingTower";
-import {SniperTower} from "./entities/towers/SniperTower";
 
 class Map extends EventEmitter {
     public grid: (GridRenderable | 0 | 1)[][] = new Array(100).fill(0).map(() => new Array(40).fill(0));
@@ -21,9 +18,9 @@ class Map extends EventEmitter {
         super();
         // this.addElement(9, 11, SniperTower)
         // this.addElement(9, 12, GatlingTower)
-        this.addElement(18, 3, SniperTower)
+        // this.addElement(18, 3, SniperTower)
 
-        this.homeBase = this.addBase(10, 15, true);
+        this.homeBase = this.addBase(10, 20, true);
         this.enemyBases.push(
             this.addBase(20, 3)
         )

@@ -8,11 +8,15 @@ import {controls} from "./Controls";
 import {towerPlacer} from "./TowerPlacer";
 import './InterfaceManager';
 import './WavesManager';
+import {interfaceManager} from "./InterfaceManager";
+import {waveManager} from "./WavesManager";
 
 class Game {
+    private updateInterval: number;
+    private looping:boolean = true;
 
     constructor() {
-        setInterval(this.updateLoop.bind(this), 1000 / fps);
+        this.updateInterval = setInterval(this.updateLoop.bind(this), 1000 / fps);
         requestAnimationFrame(this.drawLoop.bind(this));
 
         map.on('added', () => {
@@ -37,7 +41,18 @@ class Game {
         enemyManager.draw(ctx);
         towerPlacer.draw(ctx);
 
-        requestAnimationFrame(this.drawLoop.bind(this))
+        if(this.looping){
+            requestAnimationFrame(this.drawLoop.bind(this))
+        }
+    }
+
+    gameOver() {
+        setTimeout(() => {
+            clearInterval(this.updateInterval);
+            this.looping = false;
+            interfaceManager.showGameOver();
+            waveManager.looping = false;
+        }, 100)
     }
 }
 

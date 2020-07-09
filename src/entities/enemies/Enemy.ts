@@ -13,6 +13,7 @@ export abstract class Enemy extends Renderable implements Point {
     abstract life: number;
     abstract cash: number;
     abstract radius: number;
+    protected damage: number = 10;
     private damageTaken: number = 0;
     private targetIndex: number = 1;
     public alive = true;
@@ -65,7 +66,7 @@ export abstract class Enemy extends Renderable implements Point {
                     this.targetIndex++;
                 }
             } else {
-                // TODO: deal damage to home
+                map.homeBase.handleDamage();
                 this.alive = false;
             }
         }

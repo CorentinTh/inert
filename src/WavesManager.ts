@@ -21,29 +21,34 @@ type Wave = WaveGroup[]
 class WavesManager {
     private delayBetweenWaves = 7; //sec
     public waveCounter = 1
-    private looping = true;
+    public looping = true;
 
     constructor() {
         this.wavesLoop()
     }
 
 
+
     private async wavesLoop() {
         while (this.looping) {
             const wave = this.generateWave()
 
+            if(!this.looping) break;
             for (let i = 0; i < wave.length; ++i) {
+                if(!this.looping) break;
                 let {enemyClass, enemySpecsMultiplier, quantity, delay} = wave[i];
 
                 for (let j = 0; j < quantity; ++j) {
+                    if(!this.looping) break;
                     for (let k = 0; k < map.enemyBases.length; ++k) {
+                        if(!this.looping) break;
                         let base = map.enemyBases[k];
                         enemyManager.add(this.enemyFactory(enemyClass, enemySpecsMultiplier, base));
                     }
                     await asyncSleep(delay)
                 }
             }
-
+            if(!this.looping) break;
             await asyncSleepIntervalSecond(this.delayBetweenWaves, interfaceManager.setWaveDelay.bind(interfaceManager))
             interfaceManager.clearWaveDelay();
             interfaceManager.setWave(++this.waveCounter);

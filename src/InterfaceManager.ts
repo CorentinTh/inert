@@ -17,6 +17,7 @@ class InterfaceManager {
     private towersWrapperElement = document.getElementById('towers-wrapper')!;
     private towersStatsElement = document.getElementById('towers-stats')!;
     private waveDelayElement = document.getElementById('delay')!;
+    private gameOverElement = document.getElementById('game-over')!;
     public snackbar = new Snackbar();
 
     constructor() {
@@ -94,6 +95,10 @@ class InterfaceManager {
                 ` : ''}
             </table>
         `
+    }
+
+    showGameOver() {
+        this.gameOverElement.classList.add('visible')
     }
 }
 
