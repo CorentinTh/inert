@@ -2,10 +2,40 @@ doctype html
 html(lang='en')
   head
     meta(charset='UTF-8')
-    title Inert
+    title Inert | Minimalistic tower defense in the browser
+
+    meta(itemprop='name' content='Inert')
+    meta(property='og:title' content='Inert')
+    meta(name='twitter:title' content='Inert')
+    meta(name='description' content='Minimalistic tower defense in the browser')
+    meta(itemprop='description' content='Minimalistic tower defense in the browser')
+    meta(property='og:description' content='Minimalistic tower defense in the browser')
+    meta(name='twitter:description' content='Minimalistic tower defense in the browser')
+    meta(itemprop='image' content='/img/banner.png')
+    meta(property='og:image' content='/img/banner.png')
+    meta(name='twitter:image' content='/img/banner.png')
+    link(rel='author', href='/humans.txt')
+
+    link(rel='apple-touch-icon' sizes='57x57' href='/img/icons/apple-icon-57x57.png')
+    link(rel='apple-touch-icon' sizes='60x60' href='/img/icons/apple-icon-60x60.png')
+    link(rel='apple-touch-icon' sizes='72x72' href='/img/icons/apple-icon-72x72.png')
+    link(rel='apple-touch-icon' sizes='76x76' href='/img/icons/apple-icon-76x76.png')
+    link(rel='apple-touch-icon' sizes='114x114' href='/img/icons/apple-icon-114x114.png')
+    link(rel='apple-touch-icon' sizes='120x120' href='/img/icons/apple-icon-120x120.png')
+    link(rel='apple-touch-icon' sizes='144x144' href='/img/icons/apple-icon-144x144.png')
+    link(rel='apple-touch-icon' sizes='152x152' href='/img/icons/apple-icon-152x152.png')
+    link(rel='apple-touch-icon' sizes='180x180' href='/img/icons/apple-icon-180x180.png')
+    link(rel='icon' type='image/png' sizes='192x192' href='/img/icons/android-icon-192x192.png')
+    link(rel='icon' type='image/png' sizes='32x32' href='/img/icons/favicon-32x32.png')
+    link(rel='icon' type='image/png' sizes='96x96' href='/img/icons/favicon-96x96.png')
+    link(rel='icon' type='image/png' sizes='16x16' href='/img/icons/favicon-16x16.png')
+    link(rel='manifest' href='/manifest.webmanifest')
+    meta(name='msapplication-TileColor' content='#ffffff')
+    meta(name='msapplication-TileImage' content='/img/icons/ms-icon-144x144.png')
+    meta(name='theme-color' content='#ffffff')
+
     link(rel='stylesheet', href='styles/styles.less')
     link(href='https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap', rel='stylesheet')
-    link(rel='author', href='humans.txt')
   body
     #inert
       canvas#canvas

@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "parcel public/index.pug -d ./dev",
-    "build": "parcel build public/index.pug public/humans.txt -d ./dist"
+    "dev": "parcel public/index.pug public/*.txt public/*.xml -d ./dev",
+    "build": "parcel build public/index.pug public/*.txt public/*.xml -d ./dist"
   },
   "repository": {
     "type": "git",
