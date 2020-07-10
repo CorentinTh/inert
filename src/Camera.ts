@@ -40,8 +40,8 @@ export class Camera {
     update(): void {
         if (this.dragging) {
             this.dragDeltaDistances = {
-                x: (controls.mouse.x - this.dragStartCoordinates.x)/this.scaleRatio,
-                y: (controls.mouse.y - this.dragStartCoordinates.y)/this.scaleRatio
+                x: (controls.mouse.x - this.dragStartCoordinates.x) / this.scaleRatio,
+                y: (controls.mouse.y - this.dragStartCoordinates.y) / this.scaleRatio
             }
         }
     }
@@ -49,7 +49,7 @@ export class Camera {
     process(ctx: CanvasRenderingContext2D): void {
         ctx.translate(canvas.getElement().width / 2, canvas.getElement().height / 2)
         ctx.scale(this.scaleRatio, this.scaleRatio)
-        ctx.translate(-this.x + this.dragDeltaDistances.x, -this.y+ this.dragDeltaDistances.y);
+        ctx.translate(-this.x + this.dragDeltaDistances.x, -this.y + this.dragDeltaDistances.y);
 
         canvas.updateTransformMatrix();
     }

@@ -24,15 +24,15 @@ class Controls extends EventEmitter {
         canvas.getElement().addEventListener("mouseenter", () => this.mouseInCanvas = true)
         canvas.getElement().addEventListener("mouseleave", () => this.mouseInCanvas = false)
         canvas.getElement().addEventListener("wheel", (e) => {
-            if (e.deltaY > 0){
+            if (e.deltaY > 0) {
                 this.emit('wheel:down')
-            }else if (e.deltaY < 0){
+            } else if (e.deltaY < 0) {
                 this.emit('wheel:up')
             }
         }, {passive: true})
     }
 
-    boundMouseCoordinates(e: MouseEvent){
+    boundMouseCoordinates(e: MouseEvent) {
         return {
             x: e.clientX - this.bounds.left - this.element.clientLeft,
             y: e.clientY - this.bounds.top - this.element.clientTop

@@ -9,8 +9,8 @@ import {EventEmitter} from "./tools/EventEmitter";
 import {drawRoundedSquare} from "./tools/shapes";
 
 class Map extends EventEmitter {
-    public static GRID_W= 61;
-    public static GRID_H= 31;
+    public static GRID_W = 61;
+    public static GRID_H = 31;
     public grid: (GridRenderable | 0 | 1)[][] = new Array(Map.GRID_W).fill(0).map(() => new Array(Map.GRID_H).fill(0));
     public static TILE_SIZE: number = 40;
     public homeBase: Base;
@@ -19,7 +19,7 @@ class Map extends EventEmitter {
 
     constructor() {
         super();
-        this.homeBase = this.addBase(Math.floor(Map.GRID_W/2), Math.floor(Map.GRID_H/2), true);
+        this.homeBase = this.addBase(Math.floor(Map.GRID_W / 2), Math.floor(Map.GRID_H / 2), true);
         this.enemyBases.push(this.addBase(4, Map.GRID_H - 5))
         this.enemyBases.push(this.addBase(Map.GRID_W - 5, 4))
 
@@ -35,7 +35,7 @@ class Map extends EventEmitter {
         const gridHeight = Map.GRID_H * Map.TILE_SIZE;
 
         ctx.fillStyle = '#1f2125'
-        ctx.fillRect(0,0, gridWidth, gridHeight);
+        ctx.fillRect(0, 0, gridWidth, gridHeight);
         ctx.strokeStyle = "#25272b";
         ctx.lineWidth = 1;
         ctx.beginPath()
@@ -53,7 +53,7 @@ class Map extends EventEmitter {
 
         ctx.strokeStyle = '#4a4a4e';
         ctx.lineWidth = 3;
-        drawRoundedSquare(ctx, 0,0, gridWidth, gridHeight, 4);
+        drawRoundedSquare(ctx, 0, 0, gridWidth, gridHeight, 4);
         ctx.stroke();
     }
 

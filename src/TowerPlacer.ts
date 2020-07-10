@@ -74,7 +74,7 @@ class TowerPlacer extends Renderable {
     }
 
     isMouseOverGrid() {
-        return controls.mouseInCanvas && this.i >=0 && this.i < map.grid.length && this.j >= 0 &&  this.j < map.grid[0].length
+        return controls.mouseInCanvas && this.i >= 0 && this.i < map.grid.length && this.j >= 0 && this.j < map.grid[0].length
     }
 
     canBePlaced() {

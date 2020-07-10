@@ -27,13 +27,13 @@ class InterfaceManager {
         this.setTowers()
     }
 
-    showFocusLost(){
+    showFocusLost() {
         this.snackbar.hide();
         this.snackbar.setText('Focus as been lost, click on the window to continue.');
         this.snackbar.show()
     }
 
-    hideFocusLost(){
+    hideFocusLost() {
         this.snackbar.hide();
     }
 
