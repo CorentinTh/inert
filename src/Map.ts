@@ -7,6 +7,7 @@ import {randIndex} from "./tools/helphers";
 import {enemyManager} from "./EnemyManager";
 import {EventEmitter} from "./tools/EventEmitter";
 import {drawRoundedSquare} from "./tools/shapes";
+import {queryParamsManager} from "./QueryParamsManager";
 
 class Map extends EventEmitter {
     public static GRID_W = 61;
@@ -20,9 +21,15 @@ class Map extends EventEmitter {
     constructor() {
         super();
         this.homeBase = this.addBase(Math.floor(Map.GRID_W / 2), Math.floor(Map.GRID_H / 2), true);
-        this.enemyBases.push(this.addBase(4, Map.GRID_H - 5))
-        this.enemyBases.push(this.addBase(Map.GRID_W - 5, 4))
 
+        const difficulty = queryParamsManager.getDifficulty();
+
+        this.enemyBases.push(this.addBase(4, Map.GRID_H - 5))
+        if (difficulty > 1) this.enemyBases.push(this.addBase(Map.GRID_W - 5, 4))
+        if (difficulty > 2) this.enemyBases.push(this.addBase(Map.GRID_W - 5, Map.GRID_H - 5))
+        if (difficulty > 3) this.enemyBases.push(this.addBase(4, 4))
+
+        console.log(this.enemyBases);
         for (let i = 0; i < 150; i++) {
             this.addElement(randIndex(this.grid), randIndex(this.grid[0]), Rock)
         }
