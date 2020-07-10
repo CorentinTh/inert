@@ -8,7 +8,7 @@ git clone git@github.com:CorentinTh/inert.git
 cd inert
 npm i
 npm run dev
-# open http://localhost:1234
+# open http://localhost:1234/index.html
 ```
 
 ## Credits
