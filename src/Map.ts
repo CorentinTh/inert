@@ -63,12 +63,14 @@ class Map extends EventEmitter {
             for (let y = 0; y < this.grid[x].length; ++y) {
                 const element = this.grid[x][y];
 
-                if (element instanceof GridRenderable) {
+                if (element instanceof GridRenderable && !(element instanceof Base)) {
                     element.draw(ctx);
                 }
             }
         }
 
+        this.homeBase.draw(ctx);
+        this.enemyBases.forEach(b => b.draw(ctx))
     }
 
     pathFind(i: number, j: number) {
