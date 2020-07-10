@@ -13,16 +13,21 @@ import {interfaceManager} from "./InterfaceManager";
 import {waveManager} from "./WavesManager";
 
 class Game {
-    private updateInterval: number;
+    private updateInterval: number = -1;
     private looping: boolean = true;
 
     constructor() {
-        this.updateInterval = setInterval(this.updateLoop.bind(this), 1000 / fps);
-        requestAnimationFrame(this.drawLoop.bind(this));
-
         map.on('added', () => {
             enemyManager.updatePaths()
         });
+
+        this.start()
+    }
+
+    start(){
+        this.updateInterval = setInterval(this.updateLoop.bind(this), 1000 / fps);
+        requestAnimationFrame(this.drawLoop.bind(this));
+        waveManager.start();
     }
 
     updateLoop() {
