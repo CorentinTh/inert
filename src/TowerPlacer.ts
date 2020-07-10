@@ -6,8 +6,7 @@ import {controls} from "./Controls";
 import {GridRenderable} from "./interfaces/GridRenderable";
 import {interfaceManager} from "./InterfaceManager";
 import {cashManager} from "./CashManager";
-import {canvas, ctx} from "./Canvas";
-import {camera} from "./Camera";
+import {canvas} from "./Canvas";
 
 class TowerPlacer extends Renderable {
     public tower: Tower = new CanonTower(0, 0, Map.TILE_SIZE);
@@ -59,7 +58,7 @@ class TowerPlacer extends Renderable {
         if (this.placing) {
             this.shouldBeDrawn = false;
 
-            const mouse = camera.transformMatrix!.invertSelf().transformPoint(controls.mouse)
+            const mouse = canvas.transformMatrix!.inverse().transformPoint(controls.mouse)
 
             this.i = Math.floor(mouse.x / Map.TILE_SIZE);
             this.j = Math.floor(mouse.y / Map.TILE_SIZE);
@@ -75,7 +74,7 @@ class TowerPlacer extends Renderable {
     }
 
     isMouseOverGrid() {
-        return controls.mouseInCanvas && this.i < map.grid.length && this.j < map.grid[0].length
+        return controls.mouseInCanvas && this.i >=0 && this.i < map.grid.length && this.j >= 0 &&  this.j < map.grid[0].length
     }
 
     canBePlaced() {

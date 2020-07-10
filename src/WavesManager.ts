@@ -69,14 +69,14 @@ class WavesManager {
         const wave = [];
         const ratio = 1 + this.waveCounter / 10;
 
-        if (this.waveCounter % 10 === 0) {
+        if (this.waveCounter % 8 === 0) {
             wave.push({
                 enemyClass: BossEnemy,
                 enemySpecsMultiplier: {
                     life: ratio,
                 },
                 quantity: this.waveCounter / 10,
-                delay: 300
+                delay: 350
             })
 
             if (Math.random() > 0.6) {
@@ -86,7 +86,7 @@ class WavesManager {
                         life: ratio,
                     },
                     quantity: 1 + rand(0, this.waveCounter / 10),
-                    delay: 300
+                    delay: 350
                 })
             }
         } else if (this.isOnWave({below: 4})) {
@@ -123,16 +123,17 @@ class WavesManager {
                             speed: Math.min(1 + this.waveCounter/30, 1.5)
                         },
                         quantity: quantity / split,
-                        delay: 500
+                        delay: Math.max(500 - this.waveCounter, 100)
                     });
 
                     wave.push({
                         enemyClass: HealerEnemy,
                         enemySpecsMultiplier: {
                             life: ratio,
+                            speed: Math.min(1 + this.waveCounter/30, 1.5)
                         },
                         quantity: 1,
-                        delay: 400
+                        delay: Math.max(400 - this.waveCounter, 100)
                     })
                 }
             } else {
@@ -143,7 +144,7 @@ class WavesManager {
                         speed: Math.min(1 + this.waveCounter/30, 1.5)
                     },
                     quantity: 10 + this.waveCounter,
-                    delay: 500
+                    delay: Math.max(500 - this.waveCounter, 100)
                 })
             }
 

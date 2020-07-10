@@ -13,7 +13,6 @@ export class Camera {
         x: -this.x + canvas.getElement().width / 2,
         y: -this.y + canvas.getElement().height / 2
     }
-    public transformMatrix: DOMMatrix | undefined;
     private dragging: boolean = false;
     private dragStartCoordinates = {x: 0, y: 0};
     private dragDeltaDistances = {x: 0, y: 0};
@@ -52,7 +51,7 @@ export class Camera {
         ctx.scale(this.scaleRatio, this.scaleRatio)
         ctx.translate(-this.x + this.dragDeltaDistances.x, -this.y+ this.dragDeltaDistances.y);
 
-        this.transformMatrix = ctx.getTransform();
+        canvas.updateTransformMatrix();
     }
 
     private move(dx: number, dy: number) {

@@ -14,7 +14,7 @@ export class Base extends GridRenderable {
         yOffset: 23,
         width: Map.TILE_SIZE * 0.8,
         height: 3,
-        borderRadius: 2
+        borderRadius: 1.5
     }
 
     constructor(x: number, y: number, width: number, isHome = false) {

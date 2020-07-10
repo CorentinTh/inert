@@ -4,6 +4,7 @@ import {colors} from "./config.json"
 class Canvas extends EventEmitter {
     private readonly ctx: CanvasRenderingContext2D;
     private readonly canvasElement: HTMLCanvasElement;
+    transformMatrix: DOMMatrix | undefined;
 
     constructor() {
         super();
@@ -16,7 +17,6 @@ class Canvas extends EventEmitter {
         this.resize()
 
         window.addEventListener('resize', this.resize.bind(this))
-        // this.canvasElement.addEventListener('wheel', this.handleScroll.bind(this))
     }
 
     private resize() {
@@ -35,9 +35,12 @@ class Canvas extends EventEmitter {
     }
 
     clear() {
-        // this.ctx.clearRect(0,0, this.canvasElement.width, this.canvasElement.height);
         this.ctx.fillStyle = colors.background;
         this.ctx.fillRect(0, 0, this.canvasElement.width, this.canvasElement.height);
+    }
+
+    updateTransformMatrix() {
+        this.transformMatrix = this.ctx.getTransform();
     }
 }
 

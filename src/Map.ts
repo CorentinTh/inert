@@ -19,11 +19,9 @@ class Map extends EventEmitter {
 
     constructor() {
         super();
-        // this.addElement(9, 11, SniperTower)
-        // this.addElement(9, 12, GatlingTower)
-        // this.addElement(18, 3, SniperTower)
         this.homeBase = this.addBase(Math.floor(Map.GRID_W/2), Math.floor(Map.GRID_H/2), true);
-        this.enemyBases.push(this.addBase(20, 3))
+        this.enemyBases.push(this.addBase(4, Map.GRID_H - 5))
+        this.enemyBases.push(this.addBase(Map.GRID_W - 5, 4))
 
         for (let i = 0; i < 150; i++) {
             this.addElement(randIndex(this.grid), randIndex(this.grid[0]), Rock)

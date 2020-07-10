@@ -1,5 +1,6 @@
 import {Renderable} from "./Renderable";
 import {controls} from "../Controls";
+import {canvas} from "../Canvas";
 
 export abstract class GridRenderable extends Renderable {
     public abstract traversable: boolean;
@@ -26,11 +27,13 @@ export abstract class GridRenderable extends Renderable {
     }
 
     update(): void {
+        const trueMouse = canvas.transformMatrix!.inverse().transformPoint(controls.mouse)
+
         this.isHovered =
-            controls.mouse.y >= this.top &&
-            controls.mouse.y <= this.bottom &&
-            controls.mouse.x >= this.left &&
-            controls.mouse.x <= this.right;
+            trueMouse.y >= this.top &&
+            trueMouse.y <= this.bottom &&
+            trueMouse.x >= this.left &&
+            trueMouse.x <= this.right;
     }
 
     abstract draw(ctx: CanvasRenderingContext2D): void;
