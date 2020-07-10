@@ -3,7 +3,7 @@
   "fps": 30,
   "containerID": "game-wrapper",
   "colors": {
-    "background": "#202125",
+    "background": "#1E1E23",
     "homeBase": {
       "primary": "#27ae60",
       "secondary": "#2ecc71"

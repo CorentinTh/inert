@@ -25,7 +25,7 @@ export abstract class Enemy extends Renderable implements Point {
         yOffset: 12,
         width: 20,
         height: 3,
-        borderRadius: 3
+        borderRadius: 2
     }
 
     constructor(base: Base) {

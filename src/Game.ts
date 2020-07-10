@@ -2,6 +2,7 @@ import {canvas, ctx} from "./Canvas";
 import {fps} from "./config.json";
 import './Controls';
 import {map} from "./Map";
+import {camera} from "./Camera";
 import {enemyManager} from "./EnemyManager";
 import {munitionManager} from "./MunitionManager";
 import {controls} from "./Controls";
@@ -26,6 +27,7 @@ class Game {
 
     updateLoop() {
         if (controls.tabHasFocus()) {
+            camera.update();
             map.update();
             munitionManager.update()
             enemyManager.update()
@@ -34,12 +36,16 @@ class Game {
     }
 
     drawLoop() {
+        ctx.save();
         canvas.clear();
+        camera.process(ctx);
+
         map.drawGrid(ctx);
         munitionManager.draw(ctx);
         enemyManager.draw(ctx);
         map.draw(ctx);
         towerPlacer.draw(ctx);
+        ctx.restore();
 
         if (this.looping) {
             requestAnimationFrame(this.drawLoop.bind(this))

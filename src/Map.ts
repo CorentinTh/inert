@@ -6,9 +6,12 @@ import {easyAStar} from "./tools/astar";
 import {randIndex} from "./tools/helphers";
 import {enemyManager} from "./EnemyManager";
 import {EventEmitter} from "./tools/EventEmitter";
+import {drawRoundedSquare} from "./tools/shapes";
 
 class Map extends EventEmitter {
-    public grid: (GridRenderable | 0 | 1)[][] = new Array(100).fill(0).map(() => new Array(40).fill(0));
+    public static GRID_W= 61;
+    public static GRID_H= 31;
+    public grid: (GridRenderable | 0 | 1)[][] = new Array(Map.GRID_W).fill(0).map(() => new Array(Map.GRID_H).fill(0));
     public static TILE_SIZE: number = 40;
     public homeBase: Base;
     public enemyBases: Base[] = [];
@@ -19,34 +22,40 @@ class Map extends EventEmitter {
         // this.addElement(9, 11, SniperTower)
         // this.addElement(9, 12, GatlingTower)
         // this.addElement(18, 3, SniperTower)
+        this.homeBase = this.addBase(Math.floor(Map.GRID_W/2), Math.floor(Map.GRID_H/2), true);
+        this.enemyBases.push(this.addBase(20, 3))
 
-        this.homeBase = this.addBase(10, 20, true);
-        this.enemyBases.push(
-            this.addBase(20, 3)
-        )
-
-        for (let i = 0; i < 120; i++) {
+        for (let i = 0; i < 150; i++) {
             this.addElement(randIndex(this.grid), randIndex(this.grid[0]), Rock)
         }
     }
 
     drawGrid(ctx: CanvasRenderingContext2D) {
+
+
+        const gridWidth = Map.GRID_W * Map.TILE_SIZE;
+        const gridHeight = Map.GRID_H * Map.TILE_SIZE;
+
+        ctx.fillStyle = '#1f2125'
+        ctx.fillRect(0,0, gridWidth, gridHeight);
         ctx.strokeStyle = "#25272b";
         ctx.lineWidth = 1;
-
-        const gridWidth = this.grid.length * Map.TILE_SIZE;
-        const gridHeight = this.grid[0].length * Map.TILE_SIZE;
-
         ctx.beginPath()
-        for (let x = 0; x < this.grid.length; ++x) {
+
+        for (let x = 0; x < Map.GRID_W; ++x) {
             ctx.moveTo(x * Map.TILE_SIZE, 0);
             ctx.lineTo(x * Map.TILE_SIZE, gridHeight);
         }
-        for (let y = 0; y < this.grid[0].length; ++y) {
+        for (let y = 0; y < Map.GRID_H; ++y) {
             ctx.moveTo(0, y * Map.TILE_SIZE);
             ctx.lineTo(gridWidth, y * Map.TILE_SIZE);
         }
         ctx.closePath()
+        ctx.stroke();
+
+        ctx.strokeStyle = '#4a4a4e';
+        ctx.lineWidth = 3;
+        drawRoundedSquare(ctx, 0,0, gridWidth, gridHeight, 4);
         ctx.stroke();
     }
 
@@ -118,7 +127,7 @@ class Map extends EventEmitter {
     }
 
     canBePlaced(i: number, j: number) {
-        if (this.grid[i][j] === 0) {
+        if (this.grid[i] && this.grid[i][j] === 0) {
             this.grid[i][j] = 1;
             const canBePlaced = this.enemyBases.every(base => this.pathFind(base.i, base.j)) && enemyManager.canAllReachBase();
             this.grid[i][j] = 0;

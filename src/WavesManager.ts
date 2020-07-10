@@ -104,7 +104,7 @@ class WavesManager {
                     enemyClass: FastEnemy,
                     enemySpecsMultiplier: {
                         life: ratio,
-                        speed: Math.min(ratio, 1.5)
+                        speed: Math.min(1 + this.waveCounter/30, 1.7)
                     },
                     quantity: 2 + this.waveCounter / 5,
                     delay: 200
@@ -120,6 +120,7 @@ class WavesManager {
                         enemyClass: ArmoredEnemy,
                         enemySpecsMultiplier: {
                             life: ratio,
+                            speed: Math.min(1 + this.waveCounter/30, 1.5)
                         },
                         quantity: quantity / split,
                         delay: 500
@@ -139,6 +140,7 @@ class WavesManager {
                     enemyClass: ArmoredEnemy,
                     enemySpecsMultiplier: {
                         life: ratio,
+                        speed: Math.min(1 + this.waveCounter/30, 1.5)
                     },
                     quantity: 10 + this.waveCounter,
                     delay: 500
