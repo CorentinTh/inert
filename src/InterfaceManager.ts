@@ -9,6 +9,7 @@ import {Snackbar} from "./tools/Snackbar";
 import {LaserTower} from "./entities/towers/LaserTower";
 import {SlowTower} from "./entities/towers/SlowTower";
 import {controls} from "./Controls";
+import {queryParamsManager} from "./QueryParamsManager";
 
 class InterfaceManager {
     private versionElement = document.getElementById('version')!;
@@ -24,6 +25,13 @@ class InterfaceManager {
         this.versionElement.textContent = 'v' + version;
         controls.on('focusout', this.showFocusLost.bind(this));
         controls.on('focusin', this.hideFocusLost.bind(this));
+
+        if(!controls.tabHasFocus()) {
+            this.showFocusLost()
+        }
+
+        document.getElementById('spawner' + queryParamsManager.getDifficulty())!.classList.add('active')
+
         this.setTowers()
     }
 
