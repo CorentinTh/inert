@@ -1,5 +1,5 @@
 # Inert
-Minimalistic tower defense in the browser.
+Minimalistic tower defense in the browser. [Try it!](https://inert.now.sh)
 
 ## Dev
 
