@@ -2,6 +2,8 @@
 
 Minimalistic tower defense in the browser. [Try it!](https://inert.thomasset.me)
 
+[![demo](.github/demo.png)](https://inert.thomasset.me)
+
 ## Dev
 
 ```shell
