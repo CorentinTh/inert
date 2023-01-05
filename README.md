@@ -1,5 +1,6 @@
 # Inert
-Minimalistic tower defense in the browser. [Try it!](https://inert.now.sh)
+
+Minimalistic tower defense in the browser. [Try it!](https://inert.thomasset.me)
 
 ## Dev
 
@@ -12,9 +13,11 @@ npm run dev
 ```
 
 ## Credits
+
 Coded with ❤️ by [Corentin Thomasset](//corentin-thomasset.fr).
 
 This project is continuously deployed using [vercel.com](https://vercel.com).
 
 ## License
+
 This project is under the [MIT license](LICENSE).
