@@ -24,7 +24,7 @@ class TowerPlacer extends Renderable {
                     cashManager.withdraw(this.tower.cost)
                     map.addElement(this.i, this.j, <new (...args: any[]) => GridRenderable>this.tower.constructor);
                 } else {
-                    interfaceManager.snackbar.toast('You don\'t have enought money to buy this tower');
+                    interfaceManager.snackbar.toast('You don\'t have enough money to buy this tower');
                 }
             }
         })
