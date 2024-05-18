@@ -19,12 +19,14 @@ class InterfaceManager {
     private towersStatsElement = document.getElementById('towers-stats')!;
     private waveDelayElement = document.getElementById('delay')!;
     private gameOverElement = document.getElementById('game-over')!;
+    private demolishToggleElement = document.getElementById('demolish-toggle')!;
     public snackbar = new Snackbar();
 
     constructor() {
         this.versionElement.textContent = 'v' + version;
         controls.on('focusout', this.showFocusLost.bind(this));
         controls.on('focusin', this.hideFocusLost.bind(this));
+        this.demolishToggleElement.onclick = this.handleDemolishToggle.bind(this);
 
         if(!controls.tabHasFocus()) {
             this.showFocusLost()
@@ -33,6 +35,10 @@ class InterfaceManager {
         document.getElementById('spawner' + queryParamsManager.getDifficulty())!.classList.add('active')
 
         this.setTowers()
+    }
+
+    displaySnackbarToast(text: string, duration: number = 3000) {
+        this.snackbar.toast(text, duration);
     }
 
     showFocusLost() {
@@ -61,6 +67,18 @@ class InterfaceManager {
         this.cashElement.textContent = String(cash);
     }
 
+    handleDemolishToggle(e: Event) {
+        const isChecked = e.target instanceof HTMLInputElement && e.target.checked;
+
+        towerPlacer.toggleDemolishMode(isChecked);
+
+        if (isChecked) {
+            this.displaySnackbarToast('🚧 Click on a tower to demolish it. 🚧', 1500)
+        } else {
+            this.displaySnackbarToast('🚧 Demolish-Mode disabled 🚧', 1500)
+        }
+    }
+
     private setTowers() {
         const towers = [
             CanonTower,
@@ -84,6 +102,10 @@ class InterfaceManager {
             tower.draw(ctx);
 
             canvas.onclick = () => {
+                if ((this.demolishToggleElement as HTMLInputElement).checked) {
+                    towerPlacer.toggleDemolishMode(false);
+                    (this.demolishToggleElement as HTMLInputElement).click();
+                }
                 towerPlacer.place(TowerClass);
                 this.showTowerStats(tower);
             };
@@ -107,7 +129,7 @@ class InterfaceManager {
             <table class="table5050">
                 <tr><td>Cost: </td><td class="accent">${tower.cost} ¢</td></tr>
                 <tr><td>Aim radius:</td><td class="accent">${tower.aimRadius}</td></tr>
-                ${tower.damage > 0 ? `
+                ${typeof tower.damage === 'number' && tower.damage > 0 ? `
                     <tr><td>Damage:</td><td class="accent">${damage}</td></tr>
                     <tr><td>Reload:</td><td class="accent">${reloadDuration.toFixed(3)} s</td></tr>
                     <tr><td title="Damage Per Second">DPS:</td><td class="accent">${dps}</td></tr>
