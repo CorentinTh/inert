@@ -127,6 +127,13 @@ class Map extends EventEmitter {
         return false;
     }
 
+    deleteElement(i: number, j: number) {
+        if (this.grid[i] && this.grid[i][j] !== undefined) {
+            this.grid[i][j] = 0;
+            this.invalidatePathsCache();
+        }
+    }
+    
     addBase(i: number, j: number, isHome = false): Base {
         const base = new Base(i, j, Map.TILE_SIZE, isHome);
         this.grid[i][j] = base;

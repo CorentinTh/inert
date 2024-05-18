@@ -14,11 +14,27 @@ class TowerPlacer extends Renderable {
     private j: number = 0;
     private i: number = 0;
     private shouldBeDrawn = false;
+    private isDemolishMode = false;
 
     constructor() {
         super();
 
         controls.on('click', () => {
+            if (this.isDemolishMode) {
+
+                const mouse = canvas.transformMatrix!.inverse().transformPoint(controls.mouse)
+                const i = Math.floor(mouse.x / Map.TILE_SIZE);
+                const j = Math.floor(mouse.y / Map.TILE_SIZE);
+
+                if (i >= 0 && i < map.grid.length && j >= 0 && j < map.grid[0].length) {
+                    // Check if the element is a tower
+                    if (map.grid[i][j] instanceof Tower) {
+                        map.deleteElement(i, j);
+                    }
+                }
+                return;
+            }
+
             if (this.placing && this.canBePlaced()) {
                 if (cashManager.canWithdraw(this.tower.cost)) {
                     cashManager.withdraw(this.tower.cost)
@@ -86,6 +102,12 @@ class TowerPlacer extends Renderable {
         this.placing = true;
 
         this.tower = new TowerClass(0, 0, Map.TILE_SIZE);
+    }
+
+    toggleDemolishMode(isChecked: boolean) {
+        this.isDemolishMode = isChecked;
+        this.placing = false;
+        this.shouldBeDrawn = false;
     }
 }
 

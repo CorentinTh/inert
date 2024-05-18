@@ -169,6 +169,62 @@ body {
       }
     }
 
+    .switch-box {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      margin: 1rem 0;
+    }
+
+    .switch {
+      font-size: 15px;
+      position: relative;
+      display: inline-block;
+      width: 3.5rem;
+      height: 2rem;
+    }
+    
+    #switch-text {
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      inset: 0;
+      border: 2px solid #414141;
+      border-radius: 50px;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 1.4rem;
+      width: 1.4rem;
+      left: 0.2rem;
+      bottom: 0.2rem;
+      background-color: #2fcc71;
+      border-radius: inherit;
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+    }
+    
+    .switch input:checked + .slider {
+      box-shadow: 0 0 20px var(--accent);
+      border: 2px solid var(--accent);
+    }
+    
+    .switch input:checked + .slider:before {
+      transform: translateX(1.5em);
+    }
+
     footer {
       text-align: center;
       font-size: 14px;
