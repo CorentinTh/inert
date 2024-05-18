@@ -20,6 +20,7 @@ class InterfaceManager {
     private waveDelayElement = document.getElementById('delay')!;
     private gameOverElement = document.getElementById('game-over')!;
     private demolishToggleElement = document.getElementById('demolish-toggle')!;
+    private demolishToggleLabelElement = document.getElementById('switch-text')!;
     public snackbar = new Snackbar();
 
     constructor() {
@@ -74,8 +75,10 @@ class InterfaceManager {
 
         if (isChecked) {
             this.displaySnackbarToast('🚧 Click on a tower to demolish it. 🚧', 1500)
+            this.demolishToggleLabelElement.textContent = 'Demolish-Mode: On';
         } else {
             this.displaySnackbarToast('🚧 Demolish-Mode disabled 🚧', 1500)
+            this.demolishToggleLabelElement.textContent = 'Demolish-Mode: Off';
         }
     }
 
